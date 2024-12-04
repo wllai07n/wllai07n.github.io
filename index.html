@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>紫微牌卡</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+        .image-container {
+            display: flex;
+            justify-content: space-evenly;
+            width: 80%;
+        }
+        .image-item {
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            max-height: 500px;
+            border: 5px solid #333;
+        }
+        .image-text {
+            font-size: 28px;
+            margin-top: 10px;
+            text-align: center;
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 36px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <div>
+            <img id="image1" src="images/背面邊框.png">
+            <p id="text1" class="image-text">主星牌</p>
+        </div>
+        <div>
+            <img id="image2" src="images/背面邊框.png">
+            <p id="text2" class="image-text">輔星牌</p>
+        </div>
+        <div>
+            <img id="image3" src="images/背面邊框.png">
+            <p id="text3" class="image-text" >長生牌</p>
+        </div>
+    </div>
+    
+    <button onclick="showRandomContent()">抽牌</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
