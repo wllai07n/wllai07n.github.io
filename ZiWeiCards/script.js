@@ -144,9 +144,9 @@
     ];
     // 隨機顯示圖片和文字
     function showRandomContent() {
-        const randomIndex1 = Math.floor(Math.random() * 76);
-        const randomIndex2 = Math.floor(Math.random() * 38);
-        const randomIndex3 = Math.floor(Math.random() * 24);
+        const randomIndex1 = Math.floor(Math.random() * 76 - 1);
+        const randomIndex2 = Math.floor(Math.random() * 38 - 1);
+        const randomIndex3 = Math.floor(Math.random() * 24 - 1);
         const selectedContentMain = contentMain[randomIndex1];
         const selectedContentSupport = contentSupport[randomIndex2];
         const selectedContentLife = contentLife[randomIndex3];
