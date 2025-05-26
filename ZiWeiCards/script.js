@@ -158,4 +158,8 @@
         document.getElementById("text2").textContent = selectedContentSupport.text;
         document.getElementById("image3").src = `images/3Life/${selectedContentLife.image}`;
         document.getElementById("text3").textContent = selectedContentLife.text;
+        console.log("main", selectedContentMain.image, "support", selectedContentSupport.image, "life", selectedContentLife.image);
+        console.log("image1", document.getElementById("image1"));
+        console.log("image2", document.getElementById("image2"));
+        console.log("image3", document.getElementById("image3"));
     }
