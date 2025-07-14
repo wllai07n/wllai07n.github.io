@@ -628,7 +628,7 @@ function saveCardScreen() {
 }
 
 // 1. 定義 API 端點與您的金鑰
-const COUNTER_UP_API_URL = 'https://api.counterapi.dev/v2/zweicards/zweicards/up';
+const COUNTER_UP_API_URL = 'https://api.counterapi.dev/v2/ziweicards/ziweicards/up';
 
 // 2. 建立一個非同步函式，呼叫 API 並更新畫面上的數字
 async function fetchViewStats() {
