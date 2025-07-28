@@ -127,7 +127,7 @@ button {
 
 /* +++ 隱藏用 +++ */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* 筊塊簡易排版，可自行微調 */
@@ -136,10 +136,6 @@ button {
     margin: 0 8px;
     margin-top: 20px;
 }
-/* #blocksArea {
-    gap: 120px;
-} */
-
 
 
 
