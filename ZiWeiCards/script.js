@@ -558,11 +558,11 @@ function saveCardScreen() {
     : document.getElementById("cardContainer");
   
   if(key === "blocks"){
-    container_blocks = document.getElementById("blocksArea")
+    container = document.getElementById("blocksArea")
   }else{
     container = container_card
   }
-  container = container_blocks
+  
 
   // 產生抽牌時間
   const dateObj = lastDrawTimestamp || new Date();
@@ -719,7 +719,6 @@ async function fetchViewStats() {
     console.error('取得瀏覽統計失敗：', e);
   }
 }
-
 
 
 // 頁面載入預設背面三張
