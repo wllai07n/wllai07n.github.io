@@ -257,7 +257,7 @@ function showRandomContent(isBackside = false) {
     drawTimeDiv.textContent = `抽牌時間：${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
   }
 
-  // blocksArea.classList.toggle("hidden", !isBlocks);
+  blocksArea.classList.toggle("hidden", !isBlocks);
   cardArea.classList.toggle("hidden",  isBlocks);
   drawBtn.textContent = isBlocks ? "擲筊" : "抽牌";
   shuffleBtn.textContent = isBlocks ? "重來" : "洗牌";
@@ -719,59 +719,6 @@ async function fetchViewStats() {
     console.error('取得瀏覽統計失敗：', e);
   }
 }
-
-
-
-
-
-
-
-
-/* ==== DOM ==== */
-// const blockImgs   = [
-//   document.getElementById("block1"),
-//   document.getElementById("block2"),
-// ];
-// const drawBtn     = document.getElementById("drawBtn");   // 既有抽牌按鈕
-// const cardArea    = document.getElementById("cardArea");  // 既有牌面容器
-
-/* ==== 初始化 ==== */
-// initBlocks();            // 先把預設圖片載好
-// toggleAreas();           // 依目前下拉選定值顯示相應區塊
-
-/* ==== 事件 ==== */
-// spreadSel.addEventListener("change", toggleAreas);
-// drawBtn.addEventListener("click", handleDraw);
-
-/* ==== 函式 ==== */
-// function toggleAreas () {
-//   const isBlocks = spreadSel.value === "blocks";
-//   blocksArea.classList.toggle("hidden", !isBlocks);
-//   cardArea.classList.toggle("hidden",  isBlocks);
-// }
-
-// function handleDraw () {
-//   if (spreadSel.value === "blocks") {
-//     tossBlocks();        // ★ 擲筊
-//   } else {
-//     drawCards();         // ★ 既有抽牌邏輯
-//   }
-// }
-
-function initBlocks () {
-  // img.src = `images/${folder}/${card.image}`;
-  // blockImgs[0].src = `${BLOCK_PATH}${defaultBlocks[0]}`;
-  // blockImgs[1].src = `${BLOCK_PATH}${defaultBlocks[1]}`;
-}
-
-
-
-
-
-
-
-
-
 
 
 
