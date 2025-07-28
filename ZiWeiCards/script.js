@@ -226,14 +226,12 @@ function tossBlocks () {
 }
 
 function showRandomContent(isBackside = false) {
-
   const key = document.getElementById("spreadSelector").value;
   const cardCt = document.getElementById("cardContainer");
   const twelveCt = document.getElementById("twelveContainer");
   const cardArea    = document.getElementById("cardArea");  // 既有牌面容器
   const blocksArea  = document.getElementById("blocksArea");
 
-  
   const drawTimeDiv = document.getElementById("drawTimeDisplay");
   lastDrawTimestamp = new Date();
   const pad = (n) => n.toString().padStart(2, "0");
@@ -497,7 +495,6 @@ function showRandomContent(isBackside = false) {
       isBackside ? backCard : lifes[0]
     );
   } 
-
   
   playShuffleAnimation(container);
 }
@@ -544,9 +541,7 @@ function shufflePreview() {
       ? document.getElementById("twelveContainer")
       : document.getElementById("cardContainer");
 
-  // 先播放動畫，結束後再重繪
-  // playShuffleAnimation(container, () => showRandomContent(true));
-  playShuffleAnimation(container);
+  showRandomContent(true)
 }
 function saveCardScreen() {
   console.log("儲存牌面");
