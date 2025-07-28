@@ -257,7 +257,7 @@ function showRandomContent(isBackside = false) {
     drawTimeDiv.textContent = `抽牌時間：${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
   }
 
-  blocksArea.classList.toggle("hidden", !isBlocks);
+  // blocksArea.classList.toggle("hidden", !isBlocks);
   cardArea.classList.toggle("hidden",  isBlocks);
   drawBtn.textContent = isBlocks ? "擲筊" : "抽牌";
   shuffleBtn.textContent = isBlocks ? "重來" : "洗牌";
