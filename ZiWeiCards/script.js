@@ -254,6 +254,7 @@ function showRandomContent(isBackside = false) {
     event_label: "draw_button",
     value: 1,
   });
+  console.log("抽牌中...");
 
   const key = document.getElementById("spreadSelector").value;
   const cardCt = document.getElementById("cardContainer");
