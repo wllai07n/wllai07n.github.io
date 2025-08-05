@@ -121,10 +121,6 @@ button {
     background-color: #607D8B;
 }
 
-
-
-
-
 /* +++ 隱藏用 +++ */
 .hidden {
     display: none !important;
@@ -136,8 +132,6 @@ button {
     margin: 0 8px;
     margin-top: 20px;
 }
-
-
 
 .hint {
     font-size: 0.8rem;
@@ -232,6 +226,11 @@ h1 a:hover {
 
 /* 文字水平置中 */
 .card p {
+    text-align: center;
+    margin: 8px 0 0;
+    font-size: 1.6rem;
+    white-space: pre-line;
+}.card p2 {
     text-align: center;
     margin: 8px 0 0;
     font-size: 1.6rem;
