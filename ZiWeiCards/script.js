@@ -1,4 +1,3 @@
-
 // 牌卡資料
 const contentMain = [
   // … 總共 78 張
@@ -193,12 +192,36 @@ function createCard(parent, folder, card) {
   const img = document.createElement("img");
   img.src = `images/${folder}/${card.image}`;
   const p = document.createElement("p");
+  const p2 = document.createElement("p2");
   if (folder == "Common") {
     p.textContent = card.text.replace("-", "\n\n");
   } else {
-    p.textContent = card.text.replace("-", "\n");
+    const text = card.text.split("-");
+    p.textContent = text[0];
+
+    if (text[1] == "(倒牌)") {
+      const first = text[1][0];
+      const last = text[1][text[1].length - 1];
+      const middle = text[1].slice(1, -1);
+
+      const firstSpan = document.createElement("span");
+      firstSpan.textContent = first;
+
+      const middleSpan = document.createElement("span");
+      middleSpan.textContent = middle;
+      middleSpan.style.textDecoration = "underline";
+
+      const lastSpan = document.createElement("span");
+      lastSpan.textContent = last;
+
+      p2.appendChild(firstSpan);
+      p2.appendChild(middleSpan);
+      p2.appendChild(lastSpan);
+    } else {
+      p2.textContent = text[1];
+    }
   }
-  d.append(img, p);
+  d.append(img, p, p2);
   parent.append(d);
 }
 
@@ -210,9 +233,9 @@ const blockOptions = {
   1: ["blocks_1-1.png", "blocks_1-2.png"],
   2: ["blocks_2-1.png", "blocks_2-2.png"],
 };
-function tossBlocks () {
+function tossBlocks() {
   // blocks_1
-  const idx1 = Math.random() < 0.5 ? 0 : 1; 
+  const idx1 = Math.random() < 0.5 ? 0 : 1;
   const block1 = document.getElementById("block1");
   block1.src = `${BLOCK_PATH}${blockOptions[1][idx1]}`;
 
@@ -229,8 +252,8 @@ function showRandomContent(isBackside = false) {
   const key = document.getElementById("spreadSelector").value;
   const cardCt = document.getElementById("cardContainer");
   const twelveCt = document.getElementById("twelveContainer");
-  const cardArea    = document.getElementById("cardArea");  // 既有牌面容器
-  const blocksArea  = document.getElementById("blocksArea");
+  const cardArea = document.getElementById("cardArea"); // 既有牌面容器
+  const blocksArea = document.getElementById("blocksArea");
 
   const drawTimeDiv = document.getElementById("drawTimeDisplay");
   lastDrawTimestamp = new Date();
@@ -242,28 +265,28 @@ function showRandomContent(isBackside = false) {
   const mm = pad(lastDrawTimestamp.getMinutes());
   const ss = pad(lastDrawTimestamp.getSeconds());
 
-  console.log(key)
+  console.log(key);
   const isBlocks = key === "blocks";
 
-  if(isBlocks){
+  if (isBlocks) {
     drawTimeDiv.textContent = `擲筊時間：${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
     const block1 = document.getElementById("block1");
     block1.src = `${BLOCK_PATH}${blockOptions[0][0]}`;
     const block2 = document.getElementById("block2");
     block2.src = `${BLOCK_PATH}${blockOptions[0][1]}`;
-  }else{
+  } else {
     drawTimeDiv.textContent = `抽牌時間：${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
   }
 
   blocksArea.classList.toggle("hidden", !isBlocks);
-  cardArea.classList.toggle("hidden",  isBlocks);
+  cardArea.classList.toggle("hidden", isBlocks);
   drawBtn.textContent = isBlocks ? "擲筊" : "抽牌";
   shuffleBtn.textContent = isBlocks ? "重來" : "洗牌";
   if (isBlocks && !isBackside) {
     playShuffleAnimation(blocksArea, () => tossBlocks());
-    return
+    return;
   }
-  
+
   // 清空並隱藏
   cardCt.innerHTML = "";
   twelveCt.innerHTML = "";
@@ -280,7 +303,7 @@ function showRandomContent(isBackside = false) {
     extraCard = null;
 
   if (!isBackside) {
-    fetchViewStats()
+    fetchViewStats();
 
     const mainShuffled = shuffle(contentMain);
     const supportShuffled = shuffle(contentSupport);
@@ -294,8 +317,7 @@ function showRandomContent(isBackside = false) {
     sups =
       spread.support > 0 ? dealUnique(supportShuffled, spread.support) : [];
     lifes = spread.life > 0 ? dealUnique(lifeShuffled, spread.life) : [];
-
-  } 
+  }
 
   // 預設背面卡片資料
   const backCard = { image: "背面邊框.png", text: "  -  " };
@@ -494,8 +516,8 @@ function showRandomContent(isBackside = false) {
       isBackside ? "Common" : "3Life",
       isBackside ? backCard : lifes[0]
     );
-  } 
-  
+  }
+
   playShuffleAnimation(container);
 }
 
@@ -511,16 +533,16 @@ function playShuffleAnimation(container, callback) {
 function shufflePreview() {
   console.log("洗牌中...");
   const key = document.getElementById("spreadSelector").value;
-  
+
   const isBlocks = key === "blocks";
-  
+
   if (isBlocks) {
     playShuffleAnimation(document.getElementById("blocksArea"), () => {
       const block1 = document.getElementById("block1");
       block1.src = `${BLOCK_PATH}${blockOptions[0][0]}`;
       const block2 = document.getElementById("block2");
-      block2.src = `${BLOCK_PATH}${blockOptions[0][1]}`;}
-    );
+      block2.src = `${BLOCK_PATH}${blockOptions[0][1]}`;
+    });
 
     const drawTimeDiv = document.getElementById("drawTimeDisplay");
     lastDrawTimestamp = new Date();
@@ -532,8 +554,8 @@ function shufflePreview() {
     const mm = pad(lastDrawTimestamp.getMinutes());
     const ss = pad(lastDrawTimestamp.getSeconds());
     drawTimeDiv.textContent = `擲筊時間：${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
-  
-    return
+
+    return;
   }
   // 選出卡片容器（單／多都用同一個 container）
   const container =
@@ -541,23 +563,22 @@ function shufflePreview() {
       ? document.getElementById("twelveContainer")
       : document.getElementById("cardContainer");
 
-  showRandomContent(true)
+  showRandomContent(true);
 }
 function saveCardScreen() {
   console.log("儲存牌面");
   const key = document.getElementById("spreadSelector").value;
 
   const container_card =
-  key === "twelve"
-    ? document.getElementById("twelveContainer")
-    : document.getElementById("cardContainer");
-  
-  if(key === "blocks"){
-    container = document.getElementById("blocksArea")
-  }else{
-    container = container_card
+    key === "twelve"
+      ? document.getElementById("twelveContainer")
+      : document.getElementById("cardContainer");
+
+  if (key === "blocks") {
+    container = document.getElementById("blocksArea");
+  } else {
+    container = container_card;
   }
-  
 
   // 產生抽牌時間
   const dateObj = lastDrawTimestamp || new Date();
@@ -575,7 +596,7 @@ function saveCardScreen() {
   var questionText = document.getElementById("questionInput").value;
 
   var spread = "擲筊";
-  
+
   if (key === "single") spread = "一張牌陣";
   else if (key == "two") spread = "二張牌陣";
   else if (key == "basicThree") spread = "三張基礎牌陣";
@@ -699,22 +720,22 @@ function saveCardScreen() {
 }
 
 // 1. 定義 API 端點與您的金鑰
-const COUNTER_UP_API_URL = 'https://api.counterapi.dev/v2/ziweicards/ziweicards/up';
+const COUNTER_UP_API_URL =
+  "https://api.counterapi.dev/v2/ziweicards/ziweicards/up";
 
 // 2. 建立一個非同步函式，呼叫 API 並更新畫面上的數字
 async function fetchViewStats() {
   try {
     const res = await fetch(COUNTER_UP_API_URL, {
-      method: 'GET'
+      method: "GET",
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    console.debug("累計抽牌次數：", (parseInt(data.data.up_count)+2)/2);
+    console.debug("累計抽牌次數：", (parseInt(data.data.up_count) + 2) / 2);
   } catch (e) {
-    console.error('取得瀏覽統計失敗：', e);
+    console.error("取得瀏覽統計失敗：", e);
   }
 }
-
 
 // 頁面載入預設背面三張
 window.onload = () => {
