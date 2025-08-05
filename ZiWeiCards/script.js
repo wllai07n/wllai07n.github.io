@@ -249,6 +249,12 @@ function tossBlocks() {
 }
 
 function showRandomContent(isBackside = false) {
+  gtag("event", "draw_card", {
+    event_category: "card",
+    event_label: "draw_button",
+    value: 1,
+  });
+
   const key = document.getElementById("spreadSelector").value;
   const cardCt = document.getElementById("cardContainer");
   const twelveCt = document.getElementById("twelveContainer");
@@ -265,7 +271,7 @@ function showRandomContent(isBackside = false) {
   const mm = pad(lastDrawTimestamp.getMinutes());
   const ss = pad(lastDrawTimestamp.getSeconds());
 
-  console.log(key);
+  // console.log(key);
   const isBlocks = key === "blocks";
 
   if (isBlocks) {
@@ -522,6 +528,11 @@ function showRandomContent(isBackside = false) {
 }
 
 function playShuffleAnimation(container, callback) {
+  gtag("event", "shuffle_card", {
+    event_category: "card",
+    event_label: "shuffle_button",
+  });
+  // console.log("開始洗牌動畫...");  
   container.classList.add("shuffling");
   // 0.6s 之後移除 class 並執行 callback
   setTimeout(() => {
@@ -566,6 +577,11 @@ function shufflePreview() {
   showRandomContent(true);
 }
 function saveCardScreen() {
+  gtag("event", "save_card", {
+    event_category: "card",
+    event_label: "save_button",
+  });
+  
   console.log("儲存牌面");
   const key = document.getElementById("spreadSelector").value;
 
