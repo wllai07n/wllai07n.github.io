@@ -3,20 +3,23 @@
 
 <head>
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5NFHJV3R');</script>
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5NFHJV3R');</script>
     <!-- End Google Tag Manager -->
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-25KJDV0K65"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-25KJDV0K65');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-25KJDV0K65');
     </script>
     <meta charset="UTF-8" />
     <title>紫微牌卡</title>
@@ -25,7 +28,7 @@
     <link rel="icon" href="/images/Logo/favicon.ico" type="32x32">
     <link rel="icon" href="/images/Logo/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/images/Logo/apple-touch-icon.png" color="#5bbad5">
-    
+
     <!-- 主題色（用於行動裝置工具列／Windows 釘選） -->
     <meta name="theme-color" content="#ffffff">
 
@@ -39,8 +42,8 @@
 
 <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NFHJV3R"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NFHJV3R" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <script src="script.js"></script>
     <!-- 引入截圖函式庫 -->
@@ -56,7 +59,7 @@
             </h1>
         </div>
         <div class="update-header">
-            最後更新日期：2025/08/05
+            最後更新日期：2025/08/11
         </div>
     </header>
 
@@ -98,15 +101,15 @@
         </div>
     </div>
 
-    <!-- ★ 新增；預設先隱藏，選到「擲筊」時才顯示 -->
+    <!-- ★ 擲筊區 -->
     <div id="blocksArea" class="hidden">
-        <img id="block1">
-        <img id="block2">
+        <img id="block1" alt="第一枚筊">
+        <img id="block2" alt="第二枚筊">
+        <!-- 新增：結果文字（用 aria-live 在再次擲筊時能即時朗讀） -->
+        <p id="blocksResult" class="blocks-result" aria-live="polite"></p>
     </div>
   
+
 </body>
 
 </html>
-
-
-
