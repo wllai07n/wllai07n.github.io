@@ -55,17 +55,27 @@
 
 /* 2. 抽牌按鈕：漸層＋懸停效果 */
 #drawBtn,
-#shuffleBtn #saveBtn {
+#shuffleBtn,
+#saveBtn {
     font-family: 'Noto Sans TC', sans-serif;
     padding: 8px 16px;
-
     color: #fff;
     border: none;
     border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .15);
     cursor: pointer;
-    transition: transform .1s, box-shadow .2s;
-}
+    transition: transform .1s, box-shadow .2s, background-color .2s; }
+
+button {
+    /* 若需保留統一規則 */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
+    transition: transform .1s, box-shadow .2s, background-color .2s;     }
 
 button+button {
     margin-left: 10px;
@@ -78,7 +88,7 @@ button+button {
 }
 
 /* 按鈕共用基礎樣式 */
-button {
+/* button {
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -91,7 +101,7 @@ button {
     box-shadow .2s,
     background-color .2s;
 
-}
+}  */
 
 /* 抽牌（綠色） */
 #drawBtn {
@@ -708,4 +718,17 @@ h1 a:hover {
     color: rgb(0, 0, 255);
     /* border: 2px solid rgb(0, 0, 255);
     border-radius: 40px; */
+}
+
+/* 擲筊結果文字 */
+.blocks-result {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 1.4;
+    white-space: pre-line;
+    font-family: 'Noto Sans TC', sans-serif;
+    /* 跟抽牌一致 */
+    font-weight: bold;
+    /* ★ 粗體 */
 }
