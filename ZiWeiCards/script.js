@@ -148,6 +148,10 @@ const contentLife = [
   { image: "11胎倒.png", text: "11胎-(倒牌)" },
 ];
 
+// 放在檔案頂部
+const drawBtnEl = () => document.getElementById("drawBtn");
+const shuffleBtnEl = () => document.getElementById("shuffleBtn");
+
 // 定義各牌陣規格
 const spreads = {
   single: { main: 0, support: 0, life: 1, extra: 0 },
@@ -233,6 +237,23 @@ const blockOptions = {
   1: ["blocks_1-1.png", "blocks_1-2.png"],
   2: ["blocks_2-1.png", "blocks_2-2.png"],
 };
+
+function describeBlocks(idx1, idx2) {
+  // idx 0 代表「-1」圖（陽），idx 1 代表「-2」圖（陰）
+  const b1 = (idx1 === 0) ? "陽" : "陰";
+  const b2 = (idx2 === 0) ? "陽" : "陰";
+
+  let result;
+  if ((b1 === "陽" && b2 === "陰") || (b1 === "陰" && b2 === "陽")) {
+    result = "聖杯";
+  } else if (b1 === "陰" && b2 === "陰") {
+    result = "笑杯";
+  } else {
+    result = "蓋杯";
+  }
+  return { b1, b2, result };
+}
+
 function tossBlocks() {
   // blocks_1
   const idx1 = Math.random() < 0.5 ? 0 : 1;
@@ -243,19 +264,32 @@ function tossBlocks() {
   const idx2 = Math.random() < 0.5 ? 0 : 1;
   const block2 = document.getElementById("block2");
   block2.src = `${BLOCK_PATH}${blockOptions[2][idx2]}`;
-  // console.log("tossBlocks__"+`idx1:${idx1}, idx2:${idx2}`)
-  // console.log("tossBlocks__"+`${BLOCK_PATH}${blockOptions[1][idx1]}`)
-  // console.log("tossBlocks__"+`${BLOCK_PATH}${blockOptions[2][idx2]}`)
+
+  // ★ 新增：顯示結果文字
+  const { b1, b2, result } = describeBlocks(idx1, idx2);
+  const resEl = document.getElementById("blocksResult");
+  // resEl.textContent = `結果：${b1}、${b2} → ${result}`;
+  resEl.textContent = `(${result})`;
 }
 
-function showRandomContent(isBackside = false) {
-  gtag("event", "draw_card", {
-    event_category: "card",
-    event_label: "draw_button",
-    value: 1,
-  });
-  console.log("抽牌中...");
 
+
+// function tossBlocks() {
+//   // blocks_1
+//   const idx1 = Math.random() < 0.5 ? 0 : 1;
+//   const block1 = document.getElementById("block1");
+//   block1.src = `${BLOCK_PATH}${blockOptions[1][idx1]}`;
+
+//   // blocks_2
+//   const idx2 = Math.random() < 0.5 ? 0 : 1;
+//   const block2 = document.getElementById("block2");
+//   block2.src = `${BLOCK_PATH}${blockOptions[2][idx2]}`;
+//   // console.log("tossBlocks__"+`idx1:${idx1}, idx2:${idx2}`)
+//   // console.log("tossBlocks__"+`${BLOCK_PATH}${blockOptions[1][idx1]}`)
+//   // console.log("tossBlocks__"+`${BLOCK_PATH}${blockOptions[2][idx2]}`)
+// }
+
+function showRandomContent(isBackside = false) {
   const key = document.getElementById("spreadSelector").value;
   const cardCt = document.getElementById("cardContainer");
   const twelveCt = document.getElementById("twelveContainer");
@@ -272,7 +306,7 @@ function showRandomContent(isBackside = false) {
   const mm = pad(lastDrawTimestamp.getMinutes());
   const ss = pad(lastDrawTimestamp.getSeconds());
 
-  // console.log(key);
+  console.log(key);
   const isBlocks = key === "blocks";
 
   if (isBlocks) {
@@ -281,14 +315,18 @@ function showRandomContent(isBackside = false) {
     block1.src = `${BLOCK_PATH}${blockOptions[0][0]}`;
     const block2 = document.getElementById("block2");
     block2.src = `${BLOCK_PATH}${blockOptions[0][1]}`;
+  
+    // ★ 新增：清空/預設結果文字
+    const resEl = document.getElementById("blocksResult");
+    resEl.textContent = ''; // 或：resEl.textContent = "結果：—";
   } else {
     drawTimeDiv.textContent = `抽牌時間：${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
   }
-
+  
   blocksArea.classList.toggle("hidden", !isBlocks);
   cardArea.classList.toggle("hidden", isBlocks);
-  drawBtn.textContent = isBlocks ? "擲筊" : "抽牌";
-  shuffleBtn.textContent = isBlocks ? "重來" : "洗牌";
+  drawBtnEl.textContent = isBlocks ? "擲筊" : "抽牌";
+  shuffleBtnEl.textContent = isBlocks ? "重來" : "洗牌";
   if (isBlocks && !isBackside) {
     playShuffleAnimation(blocksArea, () => tossBlocks());
     return;
@@ -529,11 +567,6 @@ function showRandomContent(isBackside = false) {
 }
 
 function playShuffleAnimation(container, callback) {
-  gtag("event", "shuffle_card", {
-    event_category: "card",
-    event_label: "shuffle_button",
-  });
-  // console.log("開始洗牌動畫...");  
   container.classList.add("shuffling");
   // 0.6s 之後移除 class 並執行 callback
   setTimeout(() => {
@@ -567,6 +600,8 @@ function shufflePreview() {
     const ss = pad(lastDrawTimestamp.getSeconds());
     drawTimeDiv.textContent = `擲筊時間：${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
 
+    const resEl = document.getElementById("blocksResult");
+    resEl.textContent = ''; // 或：resEl.textContent = "結果：—";
     return;
   }
   // 選出卡片容器（單／多都用同一個 container）
@@ -578,13 +613,9 @@ function shufflePreview() {
   showRandomContent(true);
 }
 function saveCardScreen() {
-  gtag("event", "save_card", {
-    event_category: "card",
-    event_label: "save_button",
-  });
-  
   console.log("儲存牌面");
   const key = document.getElementById("spreadSelector").value;
+  const label = (key === "blocks") ? "擲筊時間" : "抽牌時間";
 
   const container_card =
     key === "twelve"
@@ -607,7 +638,7 @@ function saveCardScreen() {
   const mm = pad(dateObj.getMinutes());
   const ss = pad(dateObj.getSeconds());
   const timestamp = `${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
-  const timestampText = `抽牌時間：${timestamp}`;
+  const timestampText = `${label}：${timestamp}`;
 
   // 取得問題文字
   var questionText = document.getElementById("questionInput").value;
@@ -723,8 +754,8 @@ function saveCardScreen() {
     })
     .finally(() => {
       // 移除浮水印
-      container.removeChild(timeOverlay);
-      container.removeChild(questionOverlay);
+  if (timeOverlay.parentNode) timeOverlay.parentNode.removeChild(timeOverlay);
+  if (questionOverlay.parentNode) questionOverlay.parentNode.removeChild(questionOverlay);
     });
 
   function openImageInNewTab(blob, name) {
