@@ -86,21 +86,18 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
           'assets/models/concrete_cat_statue_4k.gltf/concrete_cat_statue_4k.gltf',
           'assets/models/rubber_duck_toy_4k.gltf/rubber_duck_toy_4k.gltf',
           'assets/models/potted_plant_02_4k.gltf/potted_plant_02_4k.gltf',
-          
         ];
       const skyboxes = [
             'assets/textures/alps_field.jpg',
             'assets/textures/chess-pano-4k.jpg',
             'assets/textures/rogland_clear_night.jpg',
             'assets/textures/stierberg_sunrise.jpg',
-            'assets/textures/qwantani_moonrise_puresky.jpg'
+            
             ];
 
       // 用來存目前的 node
       let currentNode = null;
       let currentSkyboxes = null;
-      randomizeSkyboxes()
-      randomizePosition()
 
       function randomizeSkyboxes() {
         if (currentSkyboxes) {
@@ -127,6 +124,17 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
           // 建立新的 Gltf2Node
           let node = new Gltf2Node({ url });
 
+          // // const model = gltf.scene;
+          // const box = new THREE.Box3().setFromObject(node);
+          // const size = new THREE.Vector3();
+          // box.getSize(size);
+
+          // // 設定最大邊長 (例如統一到 1.0 單位)
+          // const maxDimension = Math.max(size.x, size.y, size.z);
+          // const scaleFactor = 1.0 / maxDimension;
+
+          // node.scale.setScalar(scaleFactor);
+
           // 隨機位置 (X: -5~5, Y: -1.6 固定, Z: -2~-7)
           let x = (Math.random() - 0.5) * 5;
           let y = -1.6;
@@ -140,6 +148,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
           currentNode = node;
       }
       
+      randomizeSkyboxes()
+      randomizePosition()
+
       document.querySelector('#addTreeBtn').addEventListener('click', () => {
         randomizeSkyboxes();
         randomizePosition();
@@ -195,7 +206,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
       function onSessionStarted(session) {
         session.addEventListener('end', onSessionEnded);
-        session.addEventListener('selectstart', onSelectStart);
+        // session.addEventListener('selectstart', onSelectStart);
+        session.addEventListener('selectend', onSelectEnd);
 
         initGL();
         scene.inputRenderer.useProfileControllerMeshes(session);
@@ -266,72 +278,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         scene.endFrame();
       }
 
-      
-        // 狀態（左右手 0/1）
-        // const selected = [null, null];
-
-        
-        // session.addEventListener('select', onSelect);
-        // session.addEventListener('selectend', onSelectEnd);
-
-        // function handIdx(src) { return src.handedness === 'left' ? 0 : 1; }
-
-        // function getRefSpace(session) {
-        //   return session.isImmersive ? xrImmersiveRefSpace : inlineViewerHelper.referenceSpace;
-        // }
-
-      function onSelectStart(ev) {
-          randomizeSkyboxes();
-          randomizePosition();
-          // const refSpace = getRefSpace(ev.frame.session);
-          // const pose = ev.frame.getPose(ev.inputSource.targetRaySpace, refSpace);
-          // if (!pose) return;
-
-          // const hit = scene.hitTest(pose.transform); // 你的場景命中
-          // if (!hit) return;
-
-          // // 假設 boxes[i].node 有 selectable=true
-          // const box = boxes.find(b => b.node === hit.node);
-          // if (!box) return;
-
-          // const i = handIdx(ev.inputSource);
-          // selected[i] = box;
-          // setScale(box, 1.25);    // hover/準備被點的視覺
-          // box.__selected = false; // 「已點擊確立」旗標
+      function handIdx(src) { return src.handedness === 'left' ? 0 : 1; }
+      function onSelectEnd(ev) {
+          
+        const i = handIdx(ev.inputSource);
+        if(i == 0){
+            randomizeSkyboxes();
+        }else{
+            randomizePosition();
         }
-
-        // function onSelect(ev) {
-        //   const i = handIdx(ev.inputSource);
-        //   const box = selected[i];
-        //   if (!box) return;
-
-        //   // 視覺回饋（例如換色）
-        //   box.renderPrimitive.uniforms.baseColorFactor.value = [
-        //     Math.random(), Math.random(), Math.random(), 1
-        //   ];
-
-        //   setScale(box, 0.75); // 點擊成立 → 成為較小
-        //   box.__selected = true;
-        // }
-
-        // function onSelectEnd(ev) {
-        //   const i = handIdx(ev.inputSource);
-        //   const box = selected[i];
-        //   if (!box) return;
-
-        //   if (box.__selected) {
-        //     setScale(box, 1.0); // 有 select：補回正常大小
-        //   } else {
-        //     setScale(box, 0.75); // 沒 select：維持較小，表示只按了沒點
-        //   }
-        //   box.__selected = false;
-        //   selected[i] = null;
-        // }
-
-        // function setScale(box, s) {
-        //   box.scale = [s, s, s];
-        // }
-
+      }
 
       // Start the XR application.
       initXR();
