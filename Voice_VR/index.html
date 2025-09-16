@@ -164,90 +164,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 
-      // 狀態（左右手 0/1）
-      // const selected = [null, null];
-
-      session.addEventListener('selectstart', onSelectStart);
-      // session.addEventListener('select', onSelect);
-      // session.addEventListener('selectend', onSelectEnd);
-
-      // function handIdx(src) { return src.handedness === 'left' ? 0 : 1; }
-
-      // function getRefSpace(session) {
-      //   return session.isImmersive ? xrImmersiveRefSpace : inlineViewerHelper.referenceSpace;
-      // }
-
-      function onSelectStart(ev) {
-        randomizeSkyboxes();
-        randomizePosition();
-        // const refSpace = getRefSpace(ev.frame.session);
-        // const pose = ev.frame.getPose(ev.inputSource.targetRaySpace, refSpace);
-        // if (!pose) return;
-
-        // const hit = scene.hitTest(pose.transform); // 你的場景命中
-        // if (!hit) return;
-
-        // // 假設 boxes[i].node 有 selectable=true
-        // const box = boxes.find(b => b.node === hit.node);
-        // if (!box) return;
-
-        // const i = handIdx(ev.inputSource);
-        // selected[i] = box;
-        // setScale(box, 1.25);    // hover/準備被點的視覺
-        // box.__selected = false; // 「已點擊確立」旗標
-      }
-
-      // function onSelect(ev) {
-      //   const i = handIdx(ev.inputSource);
-      //   const box = selected[i];
-      //   if (!box) return;
-
-      //   // 視覺回饋（例如換色）
-      //   box.renderPrimitive.uniforms.baseColorFactor.value = [
-      //     Math.random(), Math.random(), Math.random(), 1
-      //   ];
-
-      //   setScale(box, 0.75); // 點擊成立 → 成為較小
-      //   box.__selected = true;
-      // }
-
-      // function onSelectEnd(ev) {
-      //   const i = handIdx(ev.inputSource);
-      //   const box = selected[i];
-      //   if (!box) return;
-
-      //   if (box.__selected) {
-      //     setScale(box, 1.0); // 有 select：補回正常大小
-      //   } else {
-      //     setScale(box, 0.75); // 沒 select：維持較小，表示只按了沒點
-      //   }
-      //   box.__selected = false;
-      //   selected[i] = null;
-      // }
-
-      // function setScale(box, s) {
-      //   box.scale = [s, s, s];
-      // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       function initGL() {
         if (gl)
           return;
@@ -279,6 +195,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
       function onSessionStarted(session) {
         session.addEventListener('end', onSessionEnded);
+        session.addEventListener('selectstart', onSelectStart);
 
         initGL();
         scene.inputRenderer.useProfileControllerMeshes(session);
@@ -348,6 +265,73 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
         scene.endFrame();
       }
+
+      
+        // 狀態（左右手 0/1）
+        // const selected = [null, null];
+
+        
+        // session.addEventListener('select', onSelect);
+        // session.addEventListener('selectend', onSelectEnd);
+
+        // function handIdx(src) { return src.handedness === 'left' ? 0 : 1; }
+
+        // function getRefSpace(session) {
+        //   return session.isImmersive ? xrImmersiveRefSpace : inlineViewerHelper.referenceSpace;
+        // }
+
+      function onSelectStart(ev) {
+          randomizeSkyboxes();
+          randomizePosition();
+          // const refSpace = getRefSpace(ev.frame.session);
+          // const pose = ev.frame.getPose(ev.inputSource.targetRaySpace, refSpace);
+          // if (!pose) return;
+
+          // const hit = scene.hitTest(pose.transform); // 你的場景命中
+          // if (!hit) return;
+
+          // // 假設 boxes[i].node 有 selectable=true
+          // const box = boxes.find(b => b.node === hit.node);
+          // if (!box) return;
+
+          // const i = handIdx(ev.inputSource);
+          // selected[i] = box;
+          // setScale(box, 1.25);    // hover/準備被點的視覺
+          // box.__selected = false; // 「已點擊確立」旗標
+        }
+
+        // function onSelect(ev) {
+        //   const i = handIdx(ev.inputSource);
+        //   const box = selected[i];
+        //   if (!box) return;
+
+        //   // 視覺回饋（例如換色）
+        //   box.renderPrimitive.uniforms.baseColorFactor.value = [
+        //     Math.random(), Math.random(), Math.random(), 1
+        //   ];
+
+        //   setScale(box, 0.75); // 點擊成立 → 成為較小
+        //   box.__selected = true;
+        // }
+
+        // function onSelectEnd(ev) {
+        //   const i = handIdx(ev.inputSource);
+        //   const box = selected[i];
+        //   if (!box) return;
+
+        //   if (box.__selected) {
+        //     setScale(box, 1.0); // 有 select：補回正常大小
+        //   } else {
+        //     setScale(box, 0.75); // 沒 select：維持較小，表示只按了沒點
+        //   }
+        //   box.__selected = false;
+        //   selected[i] = null;
+        // }
+
+        // function setScale(box, s) {
+        //   box.scale = [s, s, s];
+        // }
+
 
       // Start the XR application.
       initXR();
