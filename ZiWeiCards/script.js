@@ -680,6 +680,11 @@ const ZiWeiApp = {
       }
     }
 
+    // Preload images for faster display after flip
+    if (!isBackside) {
+      this.preloadImages(data);
+    }
+
     // Render Logic
     if (isBackside) {
       const container = RenderModule.render(key, { data, showBack: true });
@@ -695,6 +700,37 @@ const ZiWeiApp = {
         );
       });
     }
+  },
+
+  /** 預載入圖片以加快顯示速度 */
+  preloadImages(data) {
+    const imagesToLoad = [];
+
+    // Collect all image paths
+    if (data.mains && data.mains.length > 0) {
+      data.mains.forEach((card) => {
+        imagesToLoad.push(`images/1Main/${card.image}`);
+      });
+    }
+    if (data.sups && data.sups.length > 0) {
+      data.sups.forEach((card) => {
+        imagesToLoad.push(`images/2Support/${card.image}`);
+      });
+    }
+    if (data.lifes && data.lifes.length > 0) {
+      data.lifes.forEach((card) => {
+        imagesToLoad.push(`images/3Life/${card.image}`);
+      });
+    }
+    if (data.extra) {
+      imagesToLoad.push(`images/1Main/${data.extra.image}`);
+    }
+
+    // Preload all images concurrently
+    imagesToLoad.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
   },
 
   handleShuffle() {
