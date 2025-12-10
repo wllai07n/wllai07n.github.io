@@ -127,7 +127,7 @@ body {
   color: var(--color-text-primary);
   font-family: var(--font-sans);
   position: relative;
-  overflow-x: hidden;
+  overflow-x: auto; /* 允許水平捲動以支援十二宮大牌陣固定寬度 */
 }
 
 /* 星空粒子背景效果 */
@@ -1374,152 +1374,9 @@ h1 {
   }
 
   /* =============================================
-     十二宮位大牌陣：手機版極致精簡
-     使用 nth-child 明確設定每個子元素的 Grid 位置
-     DOM 順序：辰、巳、午、未、卯、center、申、寅、酉、丑、子、亥、戌
+     十二宮位大牌陣：手機版保持電腦版佈局，允許水平捲動
      ============================================= */
-  #twelveContainer.twelve {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    grid-template-rows: repeat(4, 1fr) !important; /* 強制行高一致，避免塌陷 */
-    gap: 2px !important;
-    margin-top: 30px;
-    padding: 4px;
-    border-width: 2px;
-    min-width: 0 !important; /* 解除電腦版 min-width: 1200px 限制 */
-    max-width: 100% !important; /* 確保不超出螢幕 */
-    width: 100% !important; /* 自適應寬度 */
-  }
-
-  /* 第 1 行：辰、巳、午、未 */
-  #twelveContainer.twelve > *:nth-child(1) {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-  } /* 辰 */
-  #twelveContainer.twelve > *:nth-child(2) {
-    grid-column: 2 !important;
-    grid-row: 1 !important;
-  } /* 巳 */
-  #twelveContainer.twelve > *:nth-child(3) {
-    grid-column: 3 !important;
-    grid-row: 1 !important;
-  } /* 午 */
-  #twelveContainer.twelve > *:nth-child(4) {
-    grid-column: 4 !important;
-    grid-row: 1 !important;
-  } /* 未 */
-
-  /* 第 2 行：卯、(center 佔 2-3 列)、申 */
-  #twelveContainer.twelve > *:nth-child(5) {
-    grid-column: 1 !important;
-    grid-row: 2 !important;
-  } /* 卯 */
-  #twelveContainer.twelve > *:nth-child(6) {
-    grid-column: 2 / 4 !important;
-    grid-row: 2 / 4 !important;
-  } /* center-area */
-  #twelveContainer.twelve > *:nth-child(7) {
-    grid-column: 4 !important;
-    grid-row: 2 !important;
-  } /* 申 */
-
-  /* 第 3 行：寅、(center 已佔據)、酉 */
-  #twelveContainer.twelve > *:nth-child(8) {
-    grid-column: 1 !important;
-    grid-row: 3 !important;
-  } /* 寅 */
-  #twelveContainer.twelve > *:nth-child(9) {
-    grid-column: 4 !important;
-    grid-row: 3 !important;
-  } /* 酉 */
-
-  /* 第 4 行：丑、子、亥、戌 */
-  #twelveContainer.twelve > *:nth-child(10) {
-    grid-column: 1 !important;
-    grid-row: 4 !important;
-  } /* 丑 */
-  #twelveContainer.twelve > *:nth-child(11) {
-    grid-column: 2 !important;
-    grid-row: 4 !important;
-  } /* 子 */
-  #twelveContainer.twelve > *:nth-child(12) {
-    grid-column: 3 !important;
-    grid-row: 4 !important;
-  } /* 亥 */
-  #twelveContainer.twelve > *:nth-child(13) {
-    grid-column: 4 !important;
-    grid-row: 4 !important;
-  } /* 戌 */
-
-  #twelveContainer.twelve .palace-cell,
-  #twelveContainer.twelve .group-pos {
-    min-height: 80px;
-    padding: 4px 2px;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  /* 手機版：宮位格內的卡片圖片縮小 */
-  #twelveContainer.twelve .palace-cell .card img,
-  #twelveContainer.twelve .group-pos img,
-  #twelveContainer.twelve img {
-    width: 55px !important;
-  }
-
-  /* 手機版：卡片文字縮小 */
-  #twelveContainer.twelve .palace-cell .card p,
-  #twelveContainer.twelve .group-pos p {
-    font-size: 0.65rem !important;
-    margin-top: 2px;
-  }
-
-  /* 手機版：地支標籤縮小並調整位置 */
-  #twelveContainer.twelve .branch-label {
-    font-size: 1rem !important;
-    bottom: 2px;
-    right: 4px;
-  }
-
-  /* 手機版：宮位名稱標籤縮小並調整位置 */
-  #twelveContainer.twelve .palace-label {
-    font-size: 1rem !important;
-    bottom: 22px;
-    right: 4px;
-  }
-
-  /* 手機版：中央區域調整 */
-  #twelveContainer.twelve .center-area {
-    flex-direction: row;
-    gap: 12px;
-    padding: 8px;
-    min-height: auto;
-  }
-
-  /* 手機版：中央區域閃光效果縮小 */
-  #twelveContainer.twelve .center-area::before {
-    width: 80px;
-    height: 80px;
-  }
-
-  /* 手機版：中央主牌與長生牌圖片縮小 */
-  #twelveContainer.twelve .center-main img,
-  #twelveContainer.twelve .center-life img {
-    width: 70px !important;
-  }
-
-  /* 手機版：中央區域卡片文字縮小 */
-  #twelveContainer.twelve .center-main p,
-  #twelveContainer.twelve .center-life p {
-    font-size: 0.75rem !important;
-    margin: 4px 0 0;
-  }
-
-  /* 手機版：牌陣標題調整 */
-  #twelveContainer.twelve::before {
-    top: -35px;
-    font-size: 0.9rem;
-    padding: 6px 16px;
-  }
+  /* 十二宮位牌陣不做響應式調整，保持固定寬度 */
 }
 
 /* ============================================================================
