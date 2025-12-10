@@ -1,0 +1,734 @@
+.control-bar .question-group,
+.control-bar .select-group,
+.control-bar .btn-group {
+    display: flex;
+    /* 讓組內的標籤和輸入框/按鈕水平排列 */
+    align-items: center;
+    /* 垂直置中組內項目 */
+    gap: 8px;
+    /* 組內項目之間的間距 */
+    /* 讓這些組佔滿可用寬度，以便它們能單獨成列 */
+    width: 100%;
+    justify-content: center;
+    /* 將組內容水平置中 */
+}
+
+
+
+
+/* 1. 控制區塊：選單＋按鈕水平置中 */
+.control-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.control-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 0;
+}
+
+.control-bar label {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1.6rem;
+    margin-right: 8px;
+    color: #444;
+}
+
+.control-bar select {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1.3rem;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    margin-right: 12px;
+    transition: border-color .2s;
+}
+
+.control-bar select:focus {
+    border-color: #6a0dad;
+}
+
+/* 2. 抽牌按鈕：漸層＋懸停效果 */
+#drawBtn,
+#shuffleBtn,
+#saveBtn {
+    font-family: 'Noto Sans TC', sans-serif;
+    padding: 8px 16px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .15);
+    cursor: pointer;
+    transition: transform .1s, box-shadow .2s, background-color .2s; }
+
+button {
+    /* 若需保留統一規則 */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
+    transition: transform .1s, box-shadow .2s, background-color .2s;     }
+
+button+button {
+    margin-left: 10px;
+}
+
+.button-group {
+    display: flex;
+    gap: 16px;
+    margin-left: 10px;
+}
+
+/* 按鈕共用基礎樣式 */
+/* button {
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: tranmargin-left: 8px;
+    sform .1s,
+    box-shadow .2s,
+    background-color .2s;
+
+}  */
+
+/* 抽牌（綠色） */
+#drawBtn {
+    background-color: #4CAF50;
+    margin-left: 8px;
+}
+
+#drawBtn:hover {
+    background-color: #66BB6A;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 洗牌（橘色） */
+#shuffleBtn {
+    background-color: #FF9800;
+}
+
+#shuffleBtn:hover {
+    background-color: #FFB74D;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 儲存畫面（灰色） */
+#saveBtn {
+    background-color: #607D8B;
+}
+
+/* +++ 隱藏用 +++ */
+.hidden {
+    display: none !important;
+}
+
+/* 筊塊簡易排版，可自行微調 */
+#blocksArea img {
+    width: 200px;
+    margin: 0 8px;
+    margin-top: 20px;
+}
+
+.hint {
+    font-size: 0.8rem;
+    color: #888;
+    margin-left: 4px;
+}
+
+
+.divider {
+    margin: 0 2px;
+    font-size: 20px;
+    color: #aaa;
+}
+
+
+/* 3. 卡片顯示區：置中＋陰影＋間距 */
+.card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.card-wrapper img {
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-wrapper .card-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 12px 0 4px;
+    color: #333;
+}
+
+.card-wrapper .card-sub {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1rem;
+    color: #666;
+}
+
+/* 整體背景留白，標題區置中 */
+body {
+    background: #fafafa;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+/* 主標題：紫微牌卡－線上抽牌 */
+h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(90deg, #6a0dad, #ff7eb3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* 小標／連結：沐心紫微 */
+h1 a {
+    display: inline-block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-left: 12px;
+    vertical-align: middle;
+    color: #6a0dad;
+    text-decoration: none;
+    border-bottom: 1px dashed #6a0dad;
+    transition: color .2s, border-color .2s;
+}
+
+h1 a:hover {
+    color: #ff7eb3;
+    border-color: #ff7eb3;
+}
+
+/* 單張卡片：直向置中圖片＋文字 */
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+/* 文字水平置中 */
+.card p {
+    text-align: center;
+    margin: 8px 0 0;
+    font-size: 1.6rem;
+    white-space: pre-line;
+}.card p2 {
+    text-align: center;
+    margin: 8px 0 0;
+    font-size: 1.6rem;
+    white-space: pre-line;
+}
+
+.card img {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+
+
+/* 牌卡樣式 */
+#cardContainer {
+    position: relative;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+/* 共用卡片樣式 */
+#cardContainer .card {
+    text-align: center;
+    margin: 8px;
+    margin: 0 8px;
+    /* 卡片間距 */
+}
+
+/* 三種簡單牌陣共用 */
+#cardContainer.single,
+#cardContainer.two,
+#cardContainer.basicThree {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#cardContainer.single p,
+#cardContainer.two p,
+#cardContainer.basicThree p {
+    font-size: 1.8rem;
+}
+
+#cardContainer.two,
+#cardContainer.basicThree {
+    align-content: center;
+    /* 垂直置中整個 grid */
+    align-items: center;
+    /* 垂直置中每個子項目 */
+}
+
+/* 一張牌陣：放大到 200px 寬 */
+#cardContainer.single .card img {
+    width: 350px;
+    height: auto;
+}
+
+/* 兩張牌陣：放大到 180px 寬 */
+#cardContainer.two .card img {
+    width: 300px;
+    height: auto;
+}
+
+/* 三張牌陣（basicThree）：放大到 160px 寬 */
+#cardContainer.basicThree .card img {
+    width: 250px;
+    height: auto;
+}
+
+
+
+/* 4. 對宮 */
+#cardContainer.opposition {
+    display: flex;
+    justify-content: center;
+    /* 全部置中 */
+    align-items: center;
+    /* 垂直置中 */
+
+    /* 三組之間要有空隙 */
+}
+
+#cardContainer.opposition .group1,
+#cardContainer.opposition .group2,
+#cardContainer.opposition .life {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    /* 同組卡片之間要有空隙 */
+}
+
+#cardContainer.opposition p {
+    font-size: 1.8rem;
+}
+
+
+
+/* 5. 三方四正：Grid 版 */
+#cardContainer.threeFour {
+    display: grid;
+    width: 100%;
+    max-width: 1000px;
+    /* 依需求調整最大寬度 */
+    margin: 0 auto;
+    /* 四欄三列：col1 空白｜col2 top/空格 ｜col3 空白｜col4 life */
+    grid-template-columns: 1fr auto 1fr auto;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+        ".       top     life   ."
+        "left    .       right  ."
+        ".       bottom  .      .";
+    gap: 20px;
+    /* 群組間距 */
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    /* 將整個 grid 块置中 */
+    justify-items: center;
+    /* 將每個子項目置中 */
+}
+
+#cardContainer.threeFour p {
+    font-size: 1.8rem;
+}
+
+#cardContainer.threeFour .group-top {
+    grid-area: top;
+    display: flex;
+    gap: 8px;
+    /* 同組內兩張卡的間距 */
+}
+
+#cardContainer.threeFour .group-bottom {
+    grid-area: bottom;
+    display: flex;
+    gap: 8px;
+}
+
+#cardContainer.threeFour .group-left {
+    grid-area: left;
+    display: flex;
+    gap: 8px;
+}
+
+#cardContainer.threeFour .group-right {
+    grid-area: right;
+    display: flex;
+    gap: 8px;
+}
+
+#cardContainer.threeFour .group-life {
+    grid-area: life;
+    display: flex;
+    justify-content: center;
+}
+
+#cardContainer.threeFour {
+    grid-template-columns: 1fr auto 1fr auto !important;
+    grid-template-rows: auto auto auto !important;
+}
+
+
+/* 6. 十二宮位：改用底圖＋絕對定位 */
+#twelveContainer.twelve {
+    position: relative;
+    width: 1375px;
+    height: 1144px;
+    margin: 0 auto;
+    background: url('images/Spreads/十二宮位大牌陣.png') no-repeat center/contain;
+}
+
+/* 各宮格改成絕對定位，依底圖上位置微調百分比 */
+#twelveContainer.twelve .group-pos {
+    position: absolute;
+    display: flex;
+    padding-top: 48px;
+    padding-left: 50px;
+    gap: 3px;
+    justify-content: center;
+    align-items: center;
+    /* 如不需要框線可移除以下 */
+    /* border: 1px solid #000; */
+}
+
+/* 頂排：辰、巳、午、未 */
+.pos2 {
+    top: 14.3%;
+    left: 13.1%;
+}
+
+.pos3 {
+    top: 14.3%;
+    left: 36.5%;
+}
+
+.pos4 {
+    top: 14.3%;
+    left: 59.8%;
+}
+
+.pos5 {
+    top: 14.3%;
+    left: 83.2%;
+}
+
+/* 右側：申、酉 */
+.pos6 {
+    top: 36.8%;
+    left: 83.2%;
+}
+
+.pos8 {
+    top: 59.2%;
+    left: 83.2%;
+}
+
+/* 底排：戌、亥、子、丑 */
+.pos12 {
+    top: 81.7%;
+    left: 83.2%;
+}
+
+.pos1 {
+    top: 81.7%;
+    left: 59.8%;
+}
+
+.pos10 {
+    top: 81.7%;
+    left: 36.5%;
+}
+
+.pos9 {
+    top: 81.7%;
+    left: 13.1%;
+}
+
+/* 左側：寅、卯 */
+.pos7 {
+    top: 59.2%;
+    left: 13.1%;
+}
+
+.pos11 {
+    top: 36.8%;
+    left: 13.1%;
+}
+
+
+
+/* 中央兩張 */
+#twelveContainer.twelve .center-main {
+    position: absolute;
+    top: 52%;
+    left: 39%;
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    justify-content: center;
+}
+
+#twelveContainer.twelve .center-main img,
+#twelveContainer.twelve .center-life img {
+    width: 180px;
+    /* 或更小 */
+    height: auto;
+}
+
+#twelveContainer.twelve .group-pos p {
+    font-size: 1.4rem;
+}
+
+#twelveContainer.twelve .center-main p,
+#twelveContainer.twelve .center-life p {
+    text-align: center;
+    margin: 8px 0 0;
+    font-size: 1.8rem;
+    white-space: pre-line;
+}
+
+#twelveContainer.twelve .center-life {
+    position: absolute;
+    top: 52%;
+    left: 61%;
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#twelveContainer.twelve img {
+    width: 110px;
+    /* 或更小 */
+    height: auto;
+    border: 1px solid #000;
+}
+
+#twelveContainer.twelve .group-pos,
+#twelveContainer.twelve .center-main,
+#twelveContainer.twelve .center-life {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 10px;
+    /* 卡片之間的小間距，可自行調整 */
+    align-items: center;
+    justify-content: center;
+}
+
+/* 確保 header 滿版 + Flex 版型 */
+.site-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* 滿版寬度 */
+    padding: 16px 20px;
+    /* 左右內距 */
+    box-sizing: border-box;
+}
+
+/* 左側 logo+標題 */
+.logo-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 右側更新日期：自動靠最右 */
+.update-header {
+    margin-left: auto;
+    /* 推到最右 */
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 0.8rem;
+    color: #777;
+    /* 如要更貼邊：可調整 padding-right */
+    padding-right: 0;
+    padding-top: 0;
+}
+
+
+/* 加到最下面 */
+@keyframes shuffleAnim {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateX(-10px) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateX(10px) rotate(5deg);
+    }
+
+    75% {
+        transform: translateX(-10px) rotate(-5deg);
+    }
+
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+/* 只要父容器加上 .shuffling，就對每張 .card 套用動畫 */
+.shuffling .card {
+    animation: shuffleAnim 0.6s ease-in-out;
+}
+
+.shuffling img {
+    animation: shuffleAnim 0.6s ease-in-out;
+}
+
+#cardContainer {
+    position: relative;
+    padding-top: 48px;
+    padding-bottom: 36px;
+}
+
+/* 問題輸入欄樣式 */
+.question-group #questionInput {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1.3rem;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 373px;
+    margin-right: 12px;
+    outline: none;
+    transition: border-color .2s;
+    align-items: center;
+}
+
+.question-group #questionInput:focus {
+    border-color: #6a0dad;
+    justify-content: center;
+}
+
+/* 控制列排版 */
+.control-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 16px;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.control-bar .control-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.question-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-bar .btn-group button {
+    margin-left: 4px;
+}
+
+
+/* 牌面容器：置中並設定水平間距 */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin: 24px 0;
+    flex-wrap: wrap;
+}
+
+.cards-container .card {
+    width: 200px;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.control-bar {
+    display: flex;
+    flex-direction: column;
+    /* 標籤＋輸入框上下堆疊 */
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.controls {
+    display: flex;
+    gap: 0.5rem;
+    /* 按鈕與下拉選單左右間距 */
+}
+
+.palace-label,
+.stem-label {
+    font-size: 40px;
+    align-self: right;
+    pointer-events: none;
+    margin-left: 10px;
+    margin-top: 20%;
+    color: rgb(0, 0, 255);
+    /* border: 2px solid rgb(0, 0, 255);
+    border-radius: 40px; */
+}
+
+/* 擲筊結果文字 */
+.blocks-result {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 1.4;
+    white-space: pre-line;
+    font-family: 'Noto Sans TC', sans-serif;
+    /* 跟抽牌一致 */
+    font-weight: bold;
+    /* ★ 粗體 */
+}
