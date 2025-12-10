@@ -69,10 +69,7 @@
       sizes="120x120"
       href="images/Logo/apple-touch-icon.png"
     />
-    <link
-      rel="apple-touch-icon"
-      href="images/Logo/apple-touch-icon.png"
-    />
+    <link rel="apple-touch-icon" href="images/Logo/apple-touch-icon.png" />
     <!-- 相容舊版 iOS (iOS 7 之前) -->
     <link
       rel="apple-touch-icon-precomposed"
@@ -210,6 +207,14 @@
       </div>
       <p id="blocksResult" class="blocks-result" aria-live="polite"></p>
     </section>
+
+    <!-- 讀取動畫 Overlay (儲存牌面時顯示) -->
+    <div id="loadingOverlay" class="loading-overlay hidden" aria-live="polite">
+      <div class="loading-content">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p class="loading-text">儲存中...</p>
+      </div>
+    </div>
 
     <!-- 外部資源：腳本 (置於頁尾以優化載入效能) -->
     <!-- 安全：已加入 SRI (Subresource Integrity) 驗證 -->
