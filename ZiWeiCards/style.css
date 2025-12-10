@@ -1297,7 +1297,7 @@ h1 {
     gap: var(--spacing-sm);
     padding: var(--spacing-md);
     justify-content: center;
-    align-items: flex-start;
+    align-items: center; /* 垂直置中 */
   }
 
   #cardContainer.opposition .group-main,
@@ -1321,16 +1321,37 @@ h1 {
     white-space: nowrap;
   }
 
-  /* 三方四正牌陣：手機版簡化為 2x3 網格 */
+  /* 三方四正牌陣：手機版 6x3 網格佈局 */
   #cardContainer.threeFour {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(6, 1fr);
     grid-template-rows: auto auto auto;
     grid-template-areas:
-      'top    life'
-      'left   right'
-      'bottom bottom';
-    gap: var(--spacing-sm);
+      '.     .     top    top    life  life' /* 第一行：空白 + A(top) + 命主卡(life) */
+      'left  left  .      .      right right' /* 第二行：B(left) + 空白 + B(right) */
+      '.     .     bottom bottom .     .'; /* 第三行：空白 + C(bottom) + 空白 */
+    gap: var(--spacing-xs); /* 縮小整體間距 */
     padding: var(--spacing-md);
+  }
+
+  /* 三方四正：各區域置中對齊 */
+  #cardContainer.threeFour .group-top {
+    justify-self: center;
+  }
+
+  #cardContainer.threeFour .group-life {
+    justify-self: center;
+  }
+
+  #cardContainer.threeFour .group-left {
+    justify-self: center;
+  }
+
+  #cardContainer.threeFour .group-right {
+    justify-self: center;
+  }
+
+  #cardContainer.threeFour .group-bottom {
+    justify-self: center;
   }
 
   #cardContainer.threeFour .group-top,
@@ -1339,7 +1360,7 @@ h1 {
   #cardContainer.threeFour .group-right,
   #cardContainer.threeFour .group-life {
     flex-direction: row;
-    gap: 4px;
+    gap: 2px; /* 縮小牌與牌之間的距離 */
   }
 
   #cardContainer.threeFour .card img {
@@ -1365,6 +1386,9 @@ h1 {
     margin-top: 30px;
     padding: 4px;
     border-width: 2px;
+    min-width: 0 !important; /* 解除電腦版 min-width: 1200px 限制 */
+    max-width: 100% !important; /* 確保不超出螢幕 */
+    width: 100% !important; /* 自適應寬度 */
   }
 
   /* 第 1 行：辰、巳、午、未 */
@@ -1427,13 +1451,75 @@ h1 {
     grid-row: 4 !important;
   } /* 戌 */
 
-  #twelveContainer.twelve .palace-cell {
+  #twelveContainer.twelve .palace-cell,
+  #twelveContainer.twelve .group-pos {
     min-height: 80px;
     padding: 4px 2px;
     flex-direction: column;
     gap: 2px;
   }
-  /* 十二宮位響應式樣式已移除，強制固定寬度 */
+
+  /* 手機版：宮位格內的卡片圖片縮小 */
+  #twelveContainer.twelve .palace-cell .card img,
+  #twelveContainer.twelve .group-pos img,
+  #twelveContainer.twelve img {
+    width: 55px !important;
+  }
+
+  /* 手機版：卡片文字縮小 */
+  #twelveContainer.twelve .palace-cell .card p,
+  #twelveContainer.twelve .group-pos p {
+    font-size: 0.65rem !important;
+    margin-top: 2px;
+  }
+
+  /* 手機版：地支標籤縮小並調整位置 */
+  #twelveContainer.twelve .branch-label {
+    font-size: 1rem !important;
+    bottom: 2px;
+    right: 4px;
+  }
+
+  /* 手機版：宮位名稱標籤縮小並調整位置 */
+  #twelveContainer.twelve .palace-label {
+    font-size: 1rem !important;
+    bottom: 22px;
+    right: 4px;
+  }
+
+  /* 手機版：中央區域調整 */
+  #twelveContainer.twelve .center-area {
+    flex-direction: row;
+    gap: 12px;
+    padding: 8px;
+    min-height: auto;
+  }
+
+  /* 手機版：中央區域閃光效果縮小 */
+  #twelveContainer.twelve .center-area::before {
+    width: 80px;
+    height: 80px;
+  }
+
+  /* 手機版：中央主牌與長生牌圖片縮小 */
+  #twelveContainer.twelve .center-main img,
+  #twelveContainer.twelve .center-life img {
+    width: 70px !important;
+  }
+
+  /* 手機版：中央區域卡片文字縮小 */
+  #twelveContainer.twelve .center-main p,
+  #twelveContainer.twelve .center-life p {
+    font-size: 0.75rem !important;
+    margin: 4px 0 0;
+  }
+
+  /* 手機版：牌陣標題調整 */
+  #twelveContainer.twelve::before {
+    top: -35px;
+    font-size: 0.9rem;
+    padding: 6px 16px;
+  }
 }
 
 /* ============================================================================

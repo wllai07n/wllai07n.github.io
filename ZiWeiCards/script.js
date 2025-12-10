@@ -834,7 +834,7 @@ const ScreenshotHelper = {
       position: absolute; bottom: 0; left: 0; width: 100%; padding: 15px 40px;
       background: rgba(255, 255, 255, 0.8); border-top: 1px solid rgba(0, 0, 0, 0.1);
       display: flex; justify-content: space-between; align-items: center;
-      font-family: 'Noto Sans TC', sans-serif; font-size: 16px; color: #4b5563;
+      font-family: 'Noto Sans TC', sans-serif; font-size: 20px; color: #4b5563;
     `;
 
     // Safety check for null question
