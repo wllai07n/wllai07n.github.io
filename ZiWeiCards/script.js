@@ -972,7 +972,7 @@ function saveCardScreen() {
       if (questionText) {
         leftInfo.innerHTML = `<span style="color: #6d28d9; font-weight: bold;">問題：</span>${questionText}`;
       } else {
-        leftInfo.innerHTML = `<span style="color: #6d28d9; font-weight: bold;">誠心祈求</span>`;
+        leftInfo.innerHTML = `<span style="color: #6d28d9; font-weight: bold;"> </span>`;
       }
 
       // 右側：只保留時間，移除品牌文字

@@ -49,15 +49,42 @@
     />
 
     <!-- Favicon 設定 -->
-    <link rel="icon" href="/images/Logo/favicon.ico" type="image/x-icon" />
-    <link rel="icon" href="/images/Logo/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="images/Logo/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="images/Logo/favicon.svg" type="image/svg+xml" />
+
+    <!-- Apple Touch Icon 設定 (多尺寸支援) -->
+    <!-- 添加版本參數以破壞快取，確保 iOS 載入最新圖示 -->
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="/ZiWeiCards/images/Logo/apple-touch-icon.png"
+      href="images/Logo/apple-touch-icon.png"
     />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="images/Logo/apple-touch-icon.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="images/Logo/apple-touch-icon.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="images/Logo/apple-touch-icon.png"
+    />
+    <!-- 相容舊版 iOS (iOS 7 之前) -->
+    <link
+      rel="apple-touch-icon-precomposed"
+      href="images/Logo/apple-touch-icon.png"
+    />
+
+    <!-- PWA 設定 -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
     <meta name="apple-mobile-web-app-title" content="紫微牌卡" />
     <meta name="theme-color" content="#ffffff" />
 
