@@ -140,9 +140,9 @@ const CONFIG = {
   BLOCKS: {
     path: 'images/4blocks/',
     options: {
-      0: ['blocks_0-1.png', 'blocks_0-2.png'], // 初始
-      1: ['blocks_1-1.png', 'blocks_1-2.png'], // 陽/左?
-      2: ['blocks_2-1.png', 'blocks_2-2.png'], // 陰/右?
+      0: ['blocks_0-1.webp', 'blocks_0-2.webp'], // 初始
+      1: ['blocks_1-1.webp', 'blocks_1-2.webp'], // 陽/左?
+      2: ['blocks_2-1.webp', 'blocks_2-2.webp'], // 陰/右?
     },
   },
 
@@ -163,7 +163,7 @@ const CONFIG = {
   ],
 
   // 預設背面牌
-  BACK_CARD: { image: '背面邊框.png', text: '  -  ' },
+  BACK_CARD: { image: '背面邊框.webp', text: '  -  ' },
 
   // API
   COUNTER_API_URL: 'https://api.counterapi.dev/v2/ziweicards/ziweicards/up',
@@ -230,8 +230,8 @@ const DataModule = {
   generateRawData(names) {
     const cards = [];
     names.forEach((name) => {
-      cards.push({ image: `${name}.png`, text: `${name}-(正牌)` });
-      cards.push({ image: `${name}倒.png`, text: `${name}-(倒牌)` });
+      cards.push({ image: `${name}.webp`, text: `${name}-(正牌)` });
+      cards.push({ image: `${name}倒.webp`, text: `${name}-(倒牌)` });
     });
     return cards;
   },
@@ -498,9 +498,9 @@ const RenderModule = {
 
     const strategy =
       this.SpreadStrategies[
-        key === 'twelve' || key === 'opposition' || key === 'threeFour'
-          ? key
-          : 'simple'
+      key === 'twelve' || key === 'opposition' || key === 'threeFour'
+        ? key
+        : 'simple'
       ];
     if (strategy) {
       strategy(container, { ...context, key }); // Pass context down
@@ -774,7 +774,7 @@ const ScreenshotHelper = {
     const spreadName = CONFIG.SPREADS[key]?.name || '未知';
     const cleanQ = question ? `_${question}` : '';
     const ts = Utils.formatDateTime(State.lastDrawTimestamp || new Date());
-    return `紫微牌卡_${spreadName}${cleanQ}_${ts}.png`;
+    return `紫微牌卡_${spreadName}${cleanQ}_${ts}.webp`;
   },
 
   capture() {
@@ -893,7 +893,7 @@ const ScreenshotHelper = {
 
     if (isiOS && isSafari) {
       canvas.toBlob(async (blob) => {
-        const file = new File([blob], filename, { type: 'image/png' });
+        const file = new File([blob], filename, { type: 'image/webp' });
         if (navigator.canShare?.({ files: [file] })) {
           try {
             await navigator.share({ files: [file] });
@@ -903,11 +903,11 @@ const ScreenshotHelper = {
         } else {
           this.openNewTab(blob, filename);
         }
-      }, 'image/png');
+      }, 'image/webp');
     } else {
       const link = document.createElement('a');
       link.download = filename;
-      link.href = canvas.toDataURL('image/png');
+      link.href = canvas.toDataURL('image/webp');
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

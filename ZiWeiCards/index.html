@@ -47,7 +47,7 @@
   <!-- 安全：內容安全政策 (CSP) -->
   <!-- 註：ws://127.0.0.1:* 用於開發環境 Live Server 熱重載 -->
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://www.googletagmanager.com 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.counterapi.dev https://www.google-analytics.com ws://127.0.0.1:* wss://127.0.0.1:*;" />
+    content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://c.clarity.ms; connect-src 'self' https://api.counterapi.dev https://www.google-analytics.com https://*.clarity.ms ws://127.0.0.1:* wss://127.0.0.1:*;" />
 
   <!-- Favicon 設定 -->
   <link rel="icon" href="images/Logo/favicon.ico" type="image/x-icon" />
@@ -63,6 +63,7 @@
   <link rel="apple-touch-icon-precomposed" href="images/Logo/apple-touch-icon.png" />
 
   <!-- PWA 設定 -->
+  <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="紫微牌卡" />
