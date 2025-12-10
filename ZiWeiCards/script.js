@@ -1,159 +1,131 @@
-// 牌卡資料
-const contentMain = [
-  // … 總共 78 張
-  { image: "天同.png", text: "天同-(正牌)" },
-  { image: "天機.png", text: "天機-(正牌)" },
-  { image: "天府.png", text: "天府-(正牌)" },
-  { image: "天梁.png", text: "天梁-(正牌)" },
-  { image: "天相.png", text: "天相-(正牌)" },
-  { image: "太陰.png", text: "太陰-(正牌)" },
-  { image: "廉貞.png", text: "廉貞-(正牌)" },
-  { image: "巨門.png", text: "巨門-(正牌)" },
-  { image: "武曲.png", text: "武曲-(正牌)" },
-  { image: "太陽.png", text: "太陽-(正牌)" },
-  { image: "天同天梁.png", text: "天同天梁-(正牌)" },
-  { image: "破軍.png", text: "破軍-(正牌)" },
-  { image: "紫微.png", text: "紫微-(正牌)" },
-  { image: "貪狼.png", text: "貪狼-(正牌)" },
-  { image: "天機巨門.png", text: "天機巨門-(正牌)" },
-  { image: "天磯天梁.png", text: "天磯天梁-(正牌)" },
-  { image: "天機太陰.png", text: "天機太陰-(正牌)" },
-  { image: "太陰天同.png", text: "太陰天同-(正牌)" },
-  { image: "巨門太陽.png", text: "巨門太陽-(正牌)" },
-  { image: "巨門天同.png", text: "巨門天同-(正牌)" },
-  { image: "太陽太陰.png", text: "太陽太陰-(正牌)" },
-  { image: "廉貞七殺.png", text: "廉貞七殺-(正牌)" },
-  { image: "太陽天梁.png", text: "太陽天梁-(正牌)" },
-  { image: "廉貞貪狼.png", text: "廉貞貪狼-(正牌)" },
-  { image: "廉貞天相.png", text: "廉貞天相-(正牌)" },
-  { image: "廉貞天府.png", text: "廉貞天府-(正牌)" },
-  { image: "武曲七殺.png", text: "武曲七殺-(正牌)" },
-  { image: "廉貞破軍.png", text: "廉貞破軍-(正牌)" },
-  { image: "武曲破軍.png", text: "武曲破軍-(正牌)" },
-  { image: "武曲貪狼.png", text: "武曲貪狼-(正牌)" },
-  { image: "武曲天相.png", text: "武曲天相-(正牌)" },
-  { image: "武曲天府.png", text: "武曲天府-(正牌)" },
-  { image: "紫微天相.png", text: "紫微天相-(正牌)" },
-  { image: "紫微破軍.png", text: "紫微破軍-(正牌)" },
-  { image: "紫微七殺.png", text: "紫微七殺-(正牌)" },
-  { image: "紫微天府.png", text: "紫微天府-(正牌)" },
-  { image: "紫微貪狼.png", text: "紫微貪狼-(正牌)" },
-  { image: "天磯天梁倒.png", text: "天磯天梁-(倒牌)" },
-  { image: "貪狼倒.png", text: "貪狼-(倒牌)" },
-  { image: "天機倒.png", text: "天機-(倒牌)" },
-  { image: "天同天梁倒.png", text: "天同天梁-(倒牌)" },
-  { image: "巨門倒.png", text: "巨門-(倒牌)" },
-  { image: "太陽倒.png", text: "太陽-(倒牌)" },
-  { image: "太陰倒.png", text: "太陰-(倒牌)" },
-  { image: "天機太陰倒.png", text: "天機太陰-(倒牌)" },
-  { image: "紫微倒.png", text: "紫微-(倒牌)" },
-  { image: "天梁倒.png", text: "天梁-(倒牌)" },
-  { image: "廉貞倒.png", text: "廉貞-(倒牌)" },
-  { image: "太陰天同倒.png", text: "太陰天同-(倒牌)" },
-  { image: "破軍倒.png", text: "破軍-(倒牌)" },
-  { image: "武曲倒.png", text: "武曲-(倒牌)" },
-  { image: "天機巨門倒.png", text: "天機巨門-(倒牌)" },
-  { image: "太陽天梁倒.png", text: "太陽天梁-(倒牌)" },
-  { image: "天府倒.png", text: "天府-(倒牌)" },
-  { image: "天相倒.png", text: "天相-(倒牌)" },
-  { image: "廉貞貪狼倒.png", text: "廉貞貪狼-(倒牌)" },
-  { image: "巨門太陽倒.png", text: "巨門太陽-(倒牌)" },
-  { image: "廉貞天相倒.png", text: "廉貞天相-(倒牌)" },
-  { image: "武曲七殺倒.png", text: "武曲七殺-(倒牌)" },
-  { image: "廉貞破軍倒.png", text: "廉貞破軍-(倒牌)" },
-  { image: "廉貞七殺倒.png", text: "廉貞七殺-(倒牌)" },
-  { image: "巨門天同倒.png", text: "巨門天同-(倒牌)" },
-  { image: "紫微貪狼倒.png", text: "紫微貪狼-(倒牌)" },
-  { image: "武曲破軍倒.png", text: "武曲破軍-(倒牌)" },
-  { image: "紫微七殺倒.png", text: "紫微七殺-(倒牌)" },
-  { image: "武曲天相倒.png", text: "武曲天相-(倒牌)" },
-  { image: "廉貞天府倒.png", text: "廉貞天府-(倒牌)" },
-  { image: "紫微天府倒.png", text: "紫微天府-(倒牌)" },
-  { image: "紫微破軍倒.png", text: "紫微破軍-(倒牌)" },
-  { image: "太陽太陰倒.png", text: "太陽太陰-(倒牌)" },
-  { image: "武曲天府倒.png", text: "武曲天府-(倒牌)" },
-  { image: "武曲貪狼倒.png", text: "武曲貪狼-(倒牌)" },
-  { image: "紫微天相倒.png", text: "紫微天相-(倒牌)" },
-  { image: "天同倒.png", text: "天同-(倒牌)" },
-  { image: "七殺倒.png", text: "七殺-(倒牌)" },
-  { image: "空宮倒.png", text: "空宮-(倒牌)" },
-  { image: "空宮.png", text: "空宮-(正牌)" },
+// ============================================================
+// 紫微牌卡應用主程式
+// ============================================================
+
+// ===== 牌卡資料產生器 =====
+
+/**
+ * 從牌名陣列產生牌卡資料（自動產生正牌與倒牌）
+ * @param {string[]} names - 牌名陣列
+ * @returns {Array<{image: string, text: string}>} - 牌卡資料陣列
+ */
+function generateCardData(names) {
+  const cards = [];
+  names.forEach((name) => {
+    // 正牌
+    cards.push({ image: `${name}.png`, text: `${name}-(正牌)` });
+    // 倒牌
+    cards.push({ image: `${name}倒.png`, text: `${name}-(倒牌)` });
+  });
+  return cards;
+}
+
+// ===== 常數與配置 =====
+
+/**
+ * 主星牌名稱（共 39 種，每種有正牌與倒牌 → 78 張）
+ * 對應資料夾：images/1Main/
+ */
+const MAIN_CARD_NAMES = [
+  // 單星
+  '七殺',
+  '天同',
+  '天府',
+  '天梁',
+  '天機',
+  '天相',
+  '太陰',
+  '太陽',
+  '巨門',
+  '廉貞',
+  '武曲',
+  '破軍',
+  '紫微',
+  '貪狼',
+  '空宮',
+  // 雙星組合
+  '天同天梁',
+  '天同巨門',
+  '天機天梁',
+  '天機太陰',
+  '天機巨門',
+  '太陰天同',
+  '太陽天梁',
+  '太陽太陰',
+  '巨門太陽',
+  '廉貞七殺',
+  '廉貞天府',
+  '廉貞天相',
+  '廉貞破軍',
+  '廉貞貪狼',
+  '武曲七殺',
+  '武曲天府',
+  '武曲天相',
+  '武曲破軍',
+  '武曲貪狼',
+  '紫微七殺',
+  '紫微天府',
+  '紫微天相',
+  '紫微破軍',
+  '紫微貪狼',
 ];
 
-const contentSupport = [
-  // … 總共 38 張
-  { image: "化科.png", text: "化科-(正牌)" },
-  { image: "化權.png", text: "化權-(正牌)" },
-  { image: "化忌.png", text: "化忌-(正牌)" },
-  { image: "天刑.png", text: "天刑-(正牌)" },
-  { image: "天鉞.png", text: "天鉞-(正牌)" },
-  { image: "左輔.png", text: "左輔-(正牌)" },
-  { image: "天魁.png", text: "天魁-(正牌)" },
-  { image: "右弼.png", text: "右弼-(正牌)" },
-  { image: "火星.png", text: "火星-(正牌)" },
-  { image: "文曲.png", text: "文曲-(正牌)" },
-  { image: "擎羊.png", text: "擎羊-(正牌)" },
-  { image: "文昌.png", text: "文昌-(正牌)" },
-  { image: "祿存.png", text: "祿存-(正牌)" },
-  { image: "空劫.png", text: "空劫-(正牌)" },
-  { image: "紅鸞天喜.png", text: "紅鸞天喜-(正牌)" },
-  { image: "陀羅.png", text: "陀羅-(正牌)" },
-  { image: "鈴星.png", text: "鈴星-(正牌)" },
-  { image: "陰煞.png", text: "陰煞-(正牌)" },
-  { image: "天魁倒.png", text: "天魁-(倒牌)" },
-  { image: "化權倒.png", text: "化權-(倒牌)" },
-  { image: "化祿倒.png", text: "化祿-(倒牌)" },
-  { image: "文曲倒.png", text: "文曲-(倒牌)" },
-  { image: "文昌倒.png", text: "文昌-(倒牌)" },
-  { image: "右弼倒.png", text: "右弼-(倒牌)" },
-  { image: "天鉞倒.png", text: "天鉞-(倒牌)" },
-  { image: "天刑倒.png", text: "天刑-(倒牌)" },
-  { image: "化忌倒.png", text: "化忌-(倒牌)" },
-  { image: "火星倒.png", text: "火星-(倒牌)" },
-  { image: "化科倒.png", text: "化科-(倒牌)" },
-  { image: "左輔倒.png", text: "左輔-(倒牌)" },
-  { image: "空劫倒.png", text: "空劫-(倒牌)" },
-  { image: "祿存倒.png", text: "祿存-(倒牌)" },
-  { image: "陰煞倒.png", text: "陰煞-(倒牌)" },
-  { image: "陀羅倒.png", text: "陀羅-(倒牌)" },
-  { image: "鈴星倒.png", text: "鈴星-(倒牌)" },
-  { image: "擎羊倒.png", text: "擎羊-(倒牌)" },
-  { image: "紅鸞天喜倒.png", text: "紅鸞天喜-(倒牌)" },
+/**
+ * 輔星牌名稱（共 19 種，每種有正牌與倒牌 → 38 張）
+ * 對應資料夾：images/2Support/
+ */
+const SUPPORT_CARD_NAMES = [
+  // 四化
+  '化科',
+  '化祿',
+  '化權',
+  '化忌',
+  // 六吉星
+  '左輔',
+  '右弼',
+  '天魁',
+  '天鉞',
+  '文昌',
+  '文曲',
+  // 六煞星
+  '火星',
+  '鈴星',
+  '擎羊',
+  '陀羅',
+  '空劫',
+  '天刑',
+  // 其他
+  '祿存',
+  '紅鸞天喜',
+  '陰煞',
 ];
 
-const contentLife = [
-  // … 總共 24 張
-  { image: "12養.png", text: "12養-(正牌)" },
-  { image: "11胎.png", text: "11胎-(正牌)" },
-  { image: "2沐浴.png", text: "2沐浴-(正牌)" },
-  { image: "10絕.png", text: "10絕-(正牌)" },
-  { image: "4臨官.png", text: "4臨官-(正牌)" },
-  { image: "5帝旺.png", text: "5帝旺-(正牌)" },
-  { image: "6衰.png", text: "6衰-(正牌)" },
-  { image: "7病.png", text: "7病-(正牌)" },
-  { image: "3冠帶.png", text: "3冠帶-(正牌)" },
-  { image: "8死.png", text: "8死-(正牌)" },
-  { image: "9墓.png", text: "9墓-(正牌)" },
-  { image: "2沐浴倒.png", text: "2沐浴-(倒牌)" },
-  { image: "1長生倒.png", text: "1長生-(倒牌)" },
-  { image: "8死倒.png", text: "8死-(倒牌)" },
-  { image: "9墓倒.png", text: "9墓-(倒牌)" },
-  { image: "6衰倒.png", text: "6衰-(倒牌)" },
-  { image: "7病倒.png", text: "7病-(倒牌)" },
-  { image: "4臨官倒.png", text: "4臨官-(倒牌)" },
-  { image: "3冠帶倒.png", text: "3冠帶-(倒牌)" },
-  { image: "5帝旺倒.png", text: "5帝旺-(倒牌)" },
-  { image: "10絕倒.png", text: "10絕-(倒牌)" },
-  { image: "12養倒.png", text: "12養-(倒牌)" },
-  { image: "11胎倒.png", text: "11胎-(倒牌)" },
+/**
+ * 生年牌名稱（共 12 種，每種有正牌與倒牌 → 24 張）
+ * 對應資料夾：images/3Life/
+ */
+const LIFE_CARD_NAMES = [
+  '1長生',
+  '2沐浴',
+  '3冠帶',
+  '4臨官',
+  '5帝旺',
+  '6衰',
+  '7病',
+  '8死',
+  '9墓',
+  '10絕',
+  '11胎',
+  '12養',
 ];
 
-// 放在檔案頂部
-const drawBtnEl = () => document.getElementById("drawBtn");
-const shuffleBtnEl = () => document.getElementById("shuffleBtn");
+// 產生牌卡資料陣列
+const CONTENT_MAIN = generateCardData(MAIN_CARD_NAMES); // 78 張
+const CONTENT_SUPPORT = generateCardData(SUPPORT_CARD_NAMES); // 38 張
+const CONTENT_LIFE = generateCardData(LIFE_CARD_NAMES); // 24 張
 
-// 定義各牌陣規格
-const spreads = {
+/** 牌陣類型與張數配置 */
+const SPREAD_CONFIG = {
   single: { main: 0, support: 0, life: 1, extra: 0 },
   two: { main: 1, support: 1, life: 0, extra: 0 },
   basicThree: { main: 1, support: 1, life: 1, extra: 0 },
@@ -162,630 +134,830 @@ const spreads = {
   twelve: { main: 12, support: 12, life: 1, extra: 1 },
 };
 
-// 最後一次抽牌的時間（null 表示還沒抽過牌）
+/** 牌陣中文名稱對應 */
+const SPREAD_NAMES = {
+  blocks: '擲筊',
+  single: '一張牌陣',
+  two: '二張牌陣',
+  basicThree: '三張基礎牌陣',
+  opposition: '對宮牌陣',
+  threeFour: '三方四正牌陣',
+  twelve: '十二宮位大牌陣',
+};
+
+/** 擲筊相關常數 */
+const BLOCKS_CONFIG = {
+  path: 'images/4blocks/',
+  options: {
+    0: ['blocks_0-1.png', 'blocks_0-2.png'],
+    1: ['blocks_1-1.png', 'blocks_1-2.png'],
+    2: ['blocks_2-1.png', 'blocks_2-2.png'],
+  },
+};
+
+/** 十二宮位名稱（順時針順序） */
+const PALACE_NAMES = [
+  '命',
+  '父',
+  '福',
+  '田',
+  '官',
+  '僕',
+  '遷',
+  '疾',
+  '財',
+  '子',
+  '夫',
+  '兄',
+];
+
+/** 地支與對應的 4x4 Grid 位置定義 */
+const BRANCH_GRID_DATA = [
+  { branch: '巳', gridPos: { row: 1, col: 2 }, palaceIdx: 0 },
+  { branch: '午', gridPos: { row: 1, col: 3 }, palaceIdx: 1 },
+  { branch: '未', gridPos: { row: 1, col: 4 }, palaceIdx: 2 },
+  { branch: '申', gridPos: { row: 2, col: 4 }, palaceIdx: 3 },
+  { branch: '酉', gridPos: { row: 3, col: 4 }, palaceIdx: 4 },
+  { branch: '戌', gridPos: { row: 4, col: 4 }, palaceIdx: 5 },
+  { branch: '亥', gridPos: { row: 4, col: 3 }, palaceIdx: 6 },
+  { branch: '子', gridPos: { row: 4, col: 2 }, palaceIdx: 7 },
+  { branch: '丑', gridPos: { row: 4, col: 1 }, palaceIdx: 8 },
+  { branch: '寅', gridPos: { row: 3, col: 1 }, palaceIdx: 9 },
+  { branch: '卯', gridPos: { row: 2, col: 1 }, palaceIdx: 10 },
+  { branch: '辰', gridPos: { row: 1, col: 1 }, palaceIdx: 11 },
+];
+
+/** 背面牌預設資料 */
+const BACK_CARD = { image: '背面邊框.png', text: '  -  ' };
+
+/** 統計 API 端點 */
+const COUNTER_API_URL =
+  'https://api.counterapi.dev/v2/ziweicards/ziweicards/up';
+
+// ===== 狀態管理 =====
 let lastDrawTimestamp = null;
 
-// Fisher–Yates 洗牌
+// ===== DOM 元素存取器 =====
+const getElement = (id) => document.getElementById(id);
+const getDrawBtn = () => getElement('drawBtn');
+const getShuffleBtn = () => getElement('shuffleBtn');
+
+// ===== 工具函式 =====
+
+/**
+ * Fisher–Yates 洗牌演算法
+ * @param {Array} arr - 要洗牌的陣列
+ * @returns {Array} - 洗牌後的新陣列
+ */
 function shuffle(arr) {
-  const a = arr.slice();
-  for (let i = a.length - 1; i > 0; i--) {
+  const result = arr.slice();
+  for (let i = result.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+    [result[i], result[j]] = [result[j], result[i]];
   }
-  return a;
+  return result;
 }
 
-// 取指定數量且不重複同名正/倒牌
+/**
+ * 抽取指定數量且不重複同名正/倒牌
+ * @param {Array} shuffledArr - 洗牌後的牌組
+ * @param {number} count - 要抽取的數量
+ * @returns {Array} - 抽取的牌陣列
+ */
 function dealUnique(shuffledArr, count) {
   const result = [];
-  const seen = new Set();
+  const seenBases = new Set();
+
   for (const card of shuffledArr) {
-    const base = card.text.split("-")[0]; // 取牌名基底
-    if (seen.has(base)) continue; // 已取過同名牌就跳過
-    seen.add(base);
+    const baseName = card.text.split('-')[0];
+    if (seenBases.has(baseName)) continue;
+
+    seenBases.add(baseName);
     result.push(card);
     if (result.length === count) break;
   }
   return result;
 }
 
-// 建立單張卡片 DOM
-function createCard(parent, folder, card) {
-  const d = document.createElement("div");
-  d.className = "card";
-  const img = document.createElement("img");
-  img.src = `images/${folder}/${card.image}`;
-  const p = document.createElement("p");
-  const p2 = document.createElement("p2");
-  if (folder == "Common") {
-    p.textContent = card.text.replace("-", "\n\n");
-  } else {
-    const text = card.text.split("-");
-    p.textContent = text[0];
-
-    if (text[1] == "(倒牌)") {
-      const first = text[1][0];
-      const last = text[1][text[1].length - 1];
-      const middle = text[1].slice(1, -1);
-
-      const firstSpan = document.createElement("span");
-      firstSpan.textContent = first;
-
-      const middleSpan = document.createElement("span");
-      middleSpan.textContent = middle;
-      middleSpan.style.textDecoration = "underline";
-
-      const lastSpan = document.createElement("span");
-      lastSpan.textContent = last;
-
-      p2.appendChild(firstSpan);
-      p2.appendChild(middleSpan);
-      p2.appendChild(lastSpan);
-    } else {
-      p2.textContent = text[1];
-    }
-  }
-  d.append(img, p, p2);
-  parent.append(d);
+/**
+ * 格式化日期時間
+ * @param {Date} date - 日期物件
+ * @returns {string} - 格式化後的字串 (如：2024/01/15 14:30:25)
+ */
+function formatDateTime(date) {
+  const pad = (n) => n.toString().padStart(2, '0');
+  return `${date.getFullYear()}/${pad(date.getMonth() + 1)}/${pad(
+    date.getDate()
+  )} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(
+    date.getSeconds()
+  )}`;
 }
 
-/* ==== 常數 ==== */
-const BLOCK_PATH = "images/4blocks/";
-const defaultBlocks = ["blocks_0-1.png", "blocks_0-2.png"];
-const blockOptions = {
-  0: ["blocks_0-1.png", "blocks_0-2.png"],
-  1: ["blocks_1-1.png", "blocks_1-2.png"],
-  2: ["blocks_2-1.png", "blocks_2-2.png"],
-};
+/**
+ * 更新抽牌時間顯示
+ * @param {string} prefix - 時間前綴文字（抽牌時間/擲筊時間）
+ * @returns {Date} - 當前時間戳
+ */
+function updateDrawTime(prefix) {
+  lastDrawTimestamp = new Date();
+  const drawTimeDiv = getElement('drawTimeDisplay');
+  drawTimeDiv.textContent = `${prefix}：${formatDateTime(lastDrawTimestamp)}`;
+  return lastDrawTimestamp;
+}
 
-function describeBlocks(idx1, idx2) {
-  // idx 0 代表「-1」圖（陽），idx 1 代表「-2」圖（陰）
-  const b1 = (idx1 === 0) ? "陽" : "陰";
-  const b2 = (idx2 === 0) ? "陽" : "陰";
+/**
+ * 判斷擲筊結果
+ * @param {number} idx1 - 第一個筊的索引 (0=陽, 1=陰)
+ * @param {number} idx2 - 第二個筊的索引 (0=陽, 1=陰)
+ * @returns {Object} - 陰陽與結果描述
+ */
+function interpretBlocks(idx1, idx2) {
+  const b1 = idx1 === 0 ? '陽' : '陰';
+  const b2 = idx2 === 0 ? '陽' : '陰';
 
   let result;
-  if ((b1 === "陽" && b2 === "陰") || (b1 === "陰" && b2 === "陽")) {
-    result = "聖杯";
-  } else if (b1 === "陰" && b2 === "陰") {
-    result = "笑杯";
+  if (b1 !== b2) {
+    result = '聖杯';
+  } else if (b1 === '陰') {
+    result = '笑杯';
   } else {
-    result = "蓋杯";
+    result = '蓋杯';
   }
+
   return { b1, b2, result };
 }
 
-function tossBlocks() {
-  // blocks_1
-  const idx1 = Math.random() < 0.5 ? 0 : 1;
-  const block1 = document.getElementById("block1");
-  block1.src = `${BLOCK_PATH}${blockOptions[1][idx1]}`;
+/**
+ * 計算十二宮位名稱的隨機排列順序
+ * @returns {Array<string>} - 長度 12 的宮位名稱陣列
+ */
+function generateRandomPalaceOrder() {
+  const randomStartIndex = Math.floor(Math.random() * 12);
+  const finalOrder = new Array(12);
 
-  // blocks_2
-  const idx2 = Math.random() < 0.5 ? 0 : 1;
-  const block2 = document.getElementById("block2");
-  block2.src = `${BLOCK_PATH}${blockOptions[2][idx2]}`;
+  for (let i = 0; i < 12; i++) {
+    const posIndex = (randomStartIndex + i) % 12;
+    finalOrder[posIndex] = PALACE_NAMES[i];
+  }
 
-  // ★ 新增：顯示結果文字
-  const { b1, b2, result } = describeBlocks(idx1, idx2);
-  const resEl = document.getElementById("blocksResult");
-  // resEl.textContent = `結果：${b1}、${b2} → ${result}`;
-  resEl.textContent = `(${result})`;
+  return finalOrder;
 }
 
+// ===== DOM 建構函式 =====
 
+/**
+ * 建立卡片文字元素（處理正牌/倒牌的不同樣式）
+ * @param {string} text - 卡片文字
+ * @param {string} folder - 資料夾名稱
+ * @returns {Object} - {p: 主文字元素, p2: 副文字元素}
+ */
+function createCardTextElements(text, folder) {
+  const p = document.createElement('p');
+  const p2 = document.createElement('p2');
 
-// function tossBlocks() {
-//   // blocks_1
-//   const idx1 = Math.random() < 0.5 ? 0 : 1;
-//   const block1 = document.getElementById("block1");
-//   block1.src = `${BLOCK_PATH}${blockOptions[1][idx1]}`;
+  if (folder === 'Common') {
+    p.textContent = text.replace('-', '\n\n');
+    return { p, p2 };
+  }
 
-//   // blocks_2
-//   const idx2 = Math.random() < 0.5 ? 0 : 1;
-//   const block2 = document.getElementById("block2");
-//   block2.src = `${BLOCK_PATH}${blockOptions[2][idx2]}`;
-//   // console.log("tossBlocks__"+`idx1:${idx1}, idx2:${idx2}`)
-//   // console.log("tossBlocks__"+`${BLOCK_PATH}${blockOptions[1][idx1]}`)
-//   // console.log("tossBlocks__"+`${BLOCK_PATH}${blockOptions[2][idx2]}`)
-// }
+  const parts = text.split('-');
+  p.textContent = parts[0];
 
-function showRandomContent(isBackside = false) {
-  const key = document.getElementById("spreadSelector").value;
-  const cardCt = document.getElementById("cardContainer");
-  const twelveCt = document.getElementById("twelveContainer");
-  const cardArea = document.getElementById("cardArea"); // 既有牌面容器
-  const blocksArea = document.getElementById("blocksArea");
+  // 倒牌時加底線裝飾
+  if (parts[1] === '(倒牌)') {
+    const firstChar = parts[1][0];
+    const middleChars = parts[1].slice(1, -1);
+    const lastChar = parts[1][parts[1].length - 1];
 
-  const drawTimeDiv = document.getElementById("drawTimeDisplay");
-  lastDrawTimestamp = new Date();
-  const pad = (n) => n.toString().padStart(2, "0");
-  const yyyy = lastDrawTimestamp.getFullYear();
-  const MM = pad(lastDrawTimestamp.getMonth() + 1);
-  const dd = pad(lastDrawTimestamp.getDate());
-  const hh = pad(lastDrawTimestamp.getHours());
-  const mm = pad(lastDrawTimestamp.getMinutes());
-  const ss = pad(lastDrawTimestamp.getSeconds());
+    const firstSpan = document.createElement('span');
+    firstSpan.textContent = firstChar;
 
-  console.log(key);
-  const isBlocks = key === "blocks";
+    const middleSpan = document.createElement('span');
+    middleSpan.textContent = middleChars;
+    middleSpan.style.textDecoration = 'underline';
 
-  if (isBlocks) {
-    drawTimeDiv.textContent = `擲筊時間：${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
-    const block1 = document.getElementById("block1");
-    block1.src = `${BLOCK_PATH}${blockOptions[0][0]}`;
-    const block2 = document.getElementById("block2");
-    block2.src = `${BLOCK_PATH}${blockOptions[0][1]}`;
-  
-    // ★ 新增：清空/預設結果文字
-    const resEl = document.getElementById("blocksResult");
-    resEl.textContent = ''; // 或：resEl.textContent = "結果：—";
+    const lastSpan = document.createElement('span');
+    lastSpan.textContent = lastChar;
+
+    p2.append(firstSpan, middleSpan, lastSpan);
   } else {
-    drawTimeDiv.textContent = `抽牌時間：${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
-  }
-  
-  blocksArea.classList.toggle("hidden", !isBlocks);
-  cardArea.classList.toggle("hidden", isBlocks);
-  drawBtnEl.textContent = isBlocks ? "擲筊" : "抽牌";
-  shuffleBtnEl.textContent = isBlocks ? "重來" : "洗牌";
-  if (isBlocks && !isBackside) {
-    playShuffleAnimation(blocksArea, () => tossBlocks());
-    return;
+    p2.textContent = parts[1];
   }
 
-  // 清空並隱藏
-  cardCt.innerHTML = "";
-  twelveCt.innerHTML = "";
-  cardCt.style.display = "none";
-  twelveCt.style.display = "none";
-
-  // 牌陣定義
-  const spread = spreads[key];
-
-  // 洗牌與抽牌（只有不是背面模式時才做）
-  let mains = [],
-    sups = [],
-    lifes = [],
-    extraCard = null;
-
-  if (!isBackside) {
-    fetchViewStats();
-
-    const mainShuffled = shuffle(contentMain);
-    const supportShuffled = shuffle(contentSupport);
-    const lifeShuffled = shuffle(contentLife);
-
-    const mainCount = spread.main + (spread.extra || 0);
-    const uniqueMain = dealUnique(mainShuffled, mainCount);
-    mains = uniqueMain.slice(0, spread.main);
-    extraCard = spread.extra > 0 ? uniqueMain[spread.main] : null;
-
-    sups =
-      spread.support > 0 ? dealUnique(supportShuffled, spread.support) : [];
-    lifes = spread.life > 0 ? dealUnique(lifeShuffled, spread.life) : [];
-  }
-
-  // 預設背面卡片資料
-  const backCard = { image: "背面邊框.png", text: "  -  " };
-
-  // 選擇容器
-  let container;
-  if (key === "twelve") {
-    container = twelveCt;
-    twelveCt.style.display = "grid";
-    twelveCt.className = key;
-  } else if (key === "threeFour") {
-    container = cardCt;
-    cardCt.style.display = "grid";
-    cardCt.className = key;
-  } else {
-    container = cardCt;
-    cardCt.style.display = "flex";
-    cardCt.className = key;
-  }
-
-  // 根據牌陣組卡（共用邏輯）
-  if (key === "twelve") {
-    // 定義十二宮位名稱，順序對應 pos1 到 pos12
-    let palaceNames; // 先宣告最終的宮位名稱陣列
-
-    // 只有在抽牌時才執行宮位排序邏輯
-    if (!isBackside) {
-      // --- 開始新的「隨機命宮起點」邏輯 ---
-
-      // 1. 定義十二宮位固定的逆時針順序
-      const orderedPalaces = [
-        "命",
-        "父",
-        "福",
-        "田",
-        "官",
-        "僕",
-        "遷",
-        "疾",
-        "財",
-        "子",
-        "夫",
-        "兄",
-      ];
-
-      // 2. 定義盤面上十二個位置(pos)的逆時針路徑
-      //    這個陣列中的數字代表迴圈的索引 `i`，它對應到盤面上從「子」位開始的逆時針順序
-      const ccwPosOrder = [9, 8, 6, 10, 1, 2, 3, 4, 5, 7, 11, 0];
-
-      // 3. 隨機選擇一個起始位置 (0-11)，作為「命宮」的起點
-      const randomStartIndex = Math.floor(Math.random() * 12);
-
-      // 4. 根據隨機起點，生成最終的宮位順序陣列
-      const finalPalaceOrder = new Array(12);
-      for (let i = 0; i < 12; i++) {
-        // 從固定的宮位順序中取出宮位 (命、兄、夫...)
-        const palace = orderedPalaces[i];
-        // 根據隨機起點，從逆時針路徑中找到該宮位應該放置的位置索引
-        const posIndex = ccwPosOrder[(randomStartIndex + i) % 12];
-        // 將宮位名稱存入最終陣列的正確位置
-        finalPalaceOrder[posIndex] = palace;
-      }
-      palaceNames = finalPalaceOrder;
-    } else {
-      // 在洗牌預覽模式下，建立一個空陣列即可
-      palaceNames = new Array(12).fill("\n\n__");
-    }
-
-    for (let i = 0; i < 12; i++) {
-      const g = document.createElement("div");
-      g.className = `group group-pos pos${i + 1}`;
-      createCard(
-        g,
-        isBackside ? "Common" : "1Main",
-        isBackside ? backCard : mains[i]
-      );
-      createCard(
-        g,
-        isBackside ? "Common" : "2Support",
-        isBackside ? backCard : sups[i]
-      );
-
-      // 如果不是顯示牌背，則新增宮位名稱標籤
-      const label = document.createElement("div");
-      label.className = "palace-label";
-      label.textContent = palaceNames[i] + "";
-      g.appendChild(label);
-      //   if (!isBackside) {
-      //     const label = document.createElement("div");
-      //     label.className = "palace-label";
-      //     label.textContent = palaceNames[i];
-      //     g.appendChild(label);
-      //   }
-
-      container.append(g);
-    }
-    const cm = document.createElement("div");
-    cm.className = "center-main";
-    createCard(
-      cm,
-      isBackside ? "Common" : "1Main",
-      isBackside ? backCard : extraCard
-    );
-
-    const cl = document.createElement("div");
-    cl.className = "center-life";
-    createCard(
-      cl,
-      isBackside ? "Common" : "3Life",
-      isBackside ? backCard : lifes[0]
-    );
-
-    container.append(cm, cl);
-  } else if (key === "opposition") {
-    const gm = document.createElement("div");
-    gm.className = "group-main";
-    for (let i = 0; i < spread.main; i++) {
-      createCard(
-        gm,
-        isBackside ? "Common" : "1Main",
-        isBackside ? backCard : mains[i]
-      );
-    }
-    const gs = document.createElement("div");
-    gs.className = "group-support";
-    for (let i = 0; i < spread.support; i++) {
-      createCard(
-        gs,
-        isBackside ? "Common" : "2Support",
-        isBackside ? backCard : sups[i]
-      );
-    }
-    const gl = document.createElement("div");
-    gl.className = "group-life";
-    createCard(
-      gl,
-      isBackside ? "Common" : "3Life",
-      isBackside ? backCard : lifes[0]
-    );
-
-    container.append(gm, gs, gl);
-  } else if (key === "threeFour") {
-    ["top", "right", "bottom", "left"].forEach((_, i) => {
-      const g = document.createElement("div");
-      g.className = `group group-${_}`;
-      createCard(
-        g,
-        isBackside ? "Common" : "1Main",
-        isBackside ? backCard : mains[i]
-      );
-      createCard(
-        g,
-        isBackside ? "Common" : "2Support",
-        isBackside ? backCard : sups[i]
-      );
-      container.append(g);
-    });
-    const gl = document.createElement("div");
-    gl.className = "group-life";
-    createCard(
-      gl,
-      isBackside ? "Common" : "3Life",
-      isBackside ? backCard : lifes[0]
-    );
-    container.append(gl);
-  } else if (key === "single") {
-    createCard(
-      container,
-      isBackside ? "Common" : "3Life",
-      isBackside ? backCard : lifes[0]
-    );
-  } else if (key === "two") {
-    createCard(
-      container,
-      isBackside ? "Common" : "1Main",
-      isBackside ? backCard : mains[0]
-    );
-    createCard(
-      container,
-      isBackside ? "Common" : "2Support",
-      isBackside ? backCard : sups[0]
-    );
-  } else if (key === "basicThree") {
-    createCard(
-      container,
-      isBackside ? "Common" : "1Main",
-      isBackside ? backCard : mains[0]
-    );
-    createCard(
-      container,
-      isBackside ? "Common" : "2Support",
-      isBackside ? backCard : sups[0]
-    );
-    createCard(
-      container,
-      isBackside ? "Common" : "3Life",
-      isBackside ? backCard : lifes[0]
-    );
-  }
-
-  playShuffleAnimation(container);
+  return { p, p2 };
 }
 
+/**
+ * 建立單張卡片 DOM
+ * @param {HTMLElement} parent - 父元素
+ * @param {string} folder - 圖片資料夾名稱
+ * @param {Object} card - 牌卡資料 {image, text}
+ */
+function createCard(parent, folder, card) {
+  const cardDiv = document.createElement('div');
+  cardDiv.className = 'card';
+
+  const img = document.createElement('img');
+  img.src = `images/${folder}/${card.image}`;
+
+  const { p, p2 } = createCardTextElements(card.text, folder);
+
+  cardDiv.append(img, p, p2);
+  parent.append(cardDiv);
+}
+
+/**
+ * 建立單一宮位格子 DOM
+ * @param {Object} params - 宮位參數
+ * @param {string} params.branch - 地支名稱
+ * @param {string} params.palaceName - 宮位名稱
+ * @param {boolean} params.isBackside - 是否顯示背面
+ * @param {Object} params.mainCard - 主牌資料
+ * @param {Object} params.supCard - 輔牌資料
+ * @returns {HTMLElement} - 宮位格子元素
+ */
+function createPalaceCell({
+  branch,
+  palaceName,
+  isBackside,
+  mainCard,
+  supCard,
+}) {
+  const cell = document.createElement('div');
+  cell.className = 'palace-cell';
+
+  // 地支標籤（右上角金色）
+  const branchLabel = document.createElement('div');
+  branchLabel.className = 'branch-label';
+  branchLabel.textContent = branch;
+  cell.appendChild(branchLabel);
+
+  // 宮位名稱標籤（左下角藍色）
+  const palaceLabel = document.createElement('div');
+  palaceLabel.className = 'palace-label';
+  palaceLabel.textContent = palaceName;
+  cell.appendChild(palaceLabel);
+
+  // 主牌與輔牌
+  const folder = isBackside ? 'Common' : '';
+  createCard(cell, folder || '1Main', isBackside ? BACK_CARD : mainCard);
+  createCard(cell, folder || '2Support', isBackside ? BACK_CARD : supCard);
+
+  return cell;
+}
+
+/**
+ * 建立浮水印樣式物件
+ * @param {Object} position - {top?, right?, bottom?, left?}
+ * @param {number} fontSize - 字體大小
+ * @returns {Object} - CSS 樣式物件
+ */
+function createWatermarkStyle(position, fontSize) {
+  return {
+    position: 'absolute',
+    ...position,
+    fontSize: `${fontSize}px`,
+    fontWeight: 'bold',
+    background: 'rgba(255,255,255,0.85)',
+    fontFamily: "'Noto Sans TC', sans-serif",
+    padding: '4px 8px',
+    borderRadius: '4px',
+    pointerEvents: 'none',
+  };
+}
+
+// ===== 動畫函式 =====
+
+/**
+ * 播放洗牌搖晃動畫
+ * @param {HTMLElement} container - 動畫容器
+ * @param {Function} [callback] - 動畫完成回調
+ */
 function playShuffleAnimation(container, callback) {
-  container.classList.add("shuffling");
-  // 0.6s 之後移除 class 並執行 callback
+  container.classList.add('shuffling');
   setTimeout(() => {
-    container.classList.remove("shuffling");
+    container.classList.remove('shuffling');
     if (callback) callback();
   }, 600);
 }
 
-function shufflePreview() {
-  console.log("洗牌中...");
-  const key = document.getElementById("spreadSelector").value;
+/**
+ * 播放翻牌動畫（中途更換圖片）
+ * @param {HTMLElement} container - 動畫容器
+ * @param {Function} [onHalfway] - 動畫中途回調（更換圖片用）
+ * @param {Function} [onComplete] - 動畫完成回調
+ */
+function playFlipAnimation(container, onHalfway, onComplete) {
+  container.classList.add('flipping');
 
-  const isBlocks = key === "blocks";
+  // 動畫進行到 40%-60% 停頓區間更換圖片
+  setTimeout(() => {
+    if (onHalfway) onHalfway();
+  }, 280);
 
-  if (isBlocks) {
-    playShuffleAnimation(document.getElementById("blocksArea"), () => {
-      const block1 = document.getElementById("block1");
-      block1.src = `${BLOCK_PATH}${blockOptions[0][0]}`;
-      const block2 = document.getElementById("block2");
-      block2.src = `${BLOCK_PATH}${blockOptions[0][1]}`;
+  // 翻面動畫結束後清理
+  setTimeout(() => {
+    container.classList.remove('flipping');
+    if (onComplete) onComplete();
+  }, 600);
+}
+
+// ===== 擲筊功能 =====
+
+/**
+ * 執行擲筊並顯示結果
+ */
+function tossBlocks() {
+  const idx1 = Math.random() < 0.5 ? 0 : 1;
+  const idx2 = Math.random() < 0.5 ? 0 : 1;
+
+  getElement(
+    'block1'
+  ).src = `${BLOCKS_CONFIG.path}${BLOCKS_CONFIG.options[1][idx1]}`;
+  getElement(
+    'block2'
+  ).src = `${BLOCKS_CONFIG.path}${BLOCKS_CONFIG.options[2][idx2]}`;
+
+  const { b1, b2, result } = interpretBlocks(idx1, idx2);
+  getElement('blocksResult').textContent = `(${result})`;
+  getElement('block1Label').textContent = b1;
+  getElement('block2Label').textContent = b2;
+}
+
+/**
+ * 重設擲筊為預設狀態
+ */
+function resetBlocks() {
+  getElement(
+    'block1'
+  ).src = `${BLOCKS_CONFIG.path}${BLOCKS_CONFIG.options[0][0]}`;
+  getElement(
+    'block2'
+  ).src = `${BLOCKS_CONFIG.path}${BLOCKS_CONFIG.options[0][1]}`;
+  getElement('block1Label').textContent = '陽';
+  getElement('block2Label').textContent = '陰';
+  getElement('blocksResult').textContent = '';
+}
+
+// ===== 牌陣渲染功能 =====
+
+/**
+ * 牌陣渲染器類別 - 處理各種牌陣的 DOM 建構
+ */
+const SpreadRenderer = {
+  /**
+   * 渲染十二宮位大牌陣
+   */
+  twelve(container, { showBack, mains, sups, palaceNames, extraCard, lifes }) {
+    const displayNames = showBack ? new Array(12).fill('__') : palaceNames;
+
+    // 依 Grid 順序處理各行
+    const rows = {
+      r1: BRANCH_GRID_DATA.filter((b) => b.gridPos.row === 1).sort(
+        (a, b) => a.gridPos.col - b.gridPos.col
+      ),
+      r2Left: BRANCH_GRID_DATA.find(
+        (b) => b.gridPos.row === 2 && b.gridPos.col === 1
+      ),
+      r2Right: BRANCH_GRID_DATA.find(
+        (b) => b.gridPos.row === 2 && b.gridPos.col === 4
+      ),
+      r3Left: BRANCH_GRID_DATA.find(
+        (b) => b.gridPos.row === 3 && b.gridPos.col === 1
+      ),
+      r3Right: BRANCH_GRID_DATA.find(
+        (b) => b.gridPos.row === 3 && b.gridPos.col === 4
+      ),
+      r4: BRANCH_GRID_DATA.filter((b) => b.gridPos.row === 4).sort(
+        (a, b) => a.gridPos.col - b.gridPos.col
+      ),
+    };
+
+    const createPalaceCellFromData = (data) =>
+      createPalaceCell({
+        branch: data.branch,
+        palaceName: displayNames[data.palaceIdx],
+        isBackside: showBack,
+        mainCard: mains[data.palaceIdx],
+        supCard: sups[data.palaceIdx],
+      });
+
+    // 第一行
+    rows.r1.forEach((data) => container.append(createPalaceCellFromData(data)));
+
+    // 第二行左側
+    container.append(createPalaceCellFromData(rows.r2Left));
+
+    // 中央區域
+    const centerArea = document.createElement('div');
+    centerArea.className = 'center-area';
+
+    const centerMain = document.createElement('div');
+    centerMain.className = 'center-main';
+    createCard(
+      centerMain,
+      showBack ? 'Common' : '1Main',
+      showBack ? BACK_CARD : extraCard
+    );
+
+    const centerLife = document.createElement('div');
+    centerLife.className = 'center-life';
+    createCard(
+      centerLife,
+      showBack ? 'Common' : '3Life',
+      showBack ? BACK_CARD : lifes[0]
+    );
+
+    centerArea.append(centerMain, centerLife);
+    container.append(centerArea);
+
+    // 第二行右側
+    container.append(createPalaceCellFromData(rows.r2Right));
+
+    // 第三行
+    container.append(createPalaceCellFromData(rows.r3Left));
+    container.append(createPalaceCellFromData(rows.r3Right));
+
+    // 第四行
+    rows.r4.forEach((data) => container.append(createPalaceCellFromData(data)));
+  },
+
+  /**
+   * 渲染對宮牌陣
+   */
+  opposition(container, { showBack, mains, sups, spread, lifes }) {
+    const createGroup = (className, folder, cards, count) => {
+      const group = document.createElement('div');
+      group.className = className;
+      for (let i = 0; i < count; i++) {
+        createCard(
+          group,
+          showBack ? 'Common' : folder,
+          showBack ? BACK_CARD : cards[i]
+        );
+      }
+      return group;
+    };
+
+    container.append(
+      createGroup('group-main', '1Main', mains, spread.main),
+      createGroup('group-support', '2Support', sups, spread.support),
+      createGroup('group-life', '3Life', lifes, 1)
+    );
+  },
+
+  /**
+   * 渲染三方四正牌陣
+   */
+  threeFour(container, { showBack, mains, sups, lifes }) {
+    const positions = ['top', 'right', 'bottom', 'left'];
+    positions.forEach((pos, i) => {
+      const group = document.createElement('div');
+      group.className = `group group-${pos}`;
+      createCard(
+        group,
+        showBack ? 'Common' : '1Main',
+        showBack ? BACK_CARD : mains[i]
+      );
+      createCard(
+        group,
+        showBack ? 'Common' : '2Support',
+        showBack ? BACK_CARD : sups[i]
+      );
+      container.append(group);
     });
 
-    const drawTimeDiv = document.getElementById("drawTimeDisplay");
-    lastDrawTimestamp = new Date();
-    const pad = (n) => n.toString().padStart(2, "0");
-    const yyyy = lastDrawTimestamp.getFullYear();
-    const MM = pad(lastDrawTimestamp.getMonth() + 1);
-    const dd = pad(lastDrawTimestamp.getDate());
-    const hh = pad(lastDrawTimestamp.getHours());
-    const mm = pad(lastDrawTimestamp.getMinutes());
-    const ss = pad(lastDrawTimestamp.getSeconds());
-    drawTimeDiv.textContent = `擲筊時間：${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
+    const lifeGroup = document.createElement('div');
+    lifeGroup.className = 'group-life';
+    createCard(
+      lifeGroup,
+      showBack ? 'Common' : '3Life',
+      showBack ? BACK_CARD : lifes[0]
+    );
+    container.append(lifeGroup);
+  },
 
-    const resEl = document.getElementById("blocksResult");
-    resEl.textContent = ''; // 或：resEl.textContent = "結果：—";
+  /**
+   * 渲染簡單牌陣（single, two, basicThree）
+   */
+  simple(container, { key, showBack, mains, sups, lifes }) {
+    const configs = {
+      single: [{ folder: '3Life', cards: lifes, idx: 0 }],
+      two: [
+        { folder: '1Main', cards: mains, idx: 0 },
+        { folder: '2Support', cards: sups, idx: 0 },
+      ],
+      basicThree: [
+        { folder: '1Main', cards: mains, idx: 0 },
+        { folder: '2Support', cards: sups, idx: 0 },
+        { folder: '3Life', cards: lifes, idx: 0 },
+      ],
+    };
+
+    (configs[key] || []).forEach(({ folder, cards, idx }) => {
+      createCard(
+        container,
+        showBack ? 'Common' : folder,
+        showBack ? BACK_CARD : cards[idx]
+      );
+    });
+  },
+};
+
+/**
+ * 渲染牌卡到容器中
+ * @param {Object} params - 渲染參數
+ * @returns {HTMLElement} - 渲染的容器
+ */
+function renderCards({
+  key,
+  showBack,
+  mains,
+  sups,
+  lifes,
+  palaceNames,
+  extraCard,
+  spread,
+}) {
+  const cardCt = getElement('cardContainer');
+  const twelveCt = getElement('twelveContainer');
+
+  // 清空並隱藏
+  cardCt.innerHTML = '';
+  twelveCt.innerHTML = '';
+  cardCt.style.display = 'none';
+  twelveCt.style.display = 'none';
+
+  // 選擇容器與設定
+  let container;
+  if (key === 'twelve') {
+    container = twelveCt;
+    twelveCt.style.display = 'grid';
+  } else if (key === 'threeFour') {
+    container = cardCt;
+    cardCt.style.display = 'grid';
+  } else {
+    container = cardCt;
+    cardCt.style.display = 'flex';
+  }
+  container.className = key;
+
+  // 依牌陣類型呼叫對應渲染器
+  const renderParams = {
+    showBack,
+    mains,
+    sups,
+    lifes,
+    palaceNames,
+    extraCard,
+    spread,
+  };
+
+  if (key === 'twelve') {
+    SpreadRenderer.twelve(container, renderParams);
+  } else if (key === 'opposition') {
+    SpreadRenderer.opposition(container, renderParams);
+  } else if (key === 'threeFour') {
+    SpreadRenderer.threeFour(container, renderParams);
+  } else {
+    SpreadRenderer.simple(container, { key, ...renderParams });
+  }
+
+  return container;
+}
+
+// ===== 主要功能函式 =====
+
+/**
+ * 抽牌/洗牌主函式
+ * @param {boolean} [isBackside=false] - 是否為洗牌預覽模式（顯示背面）
+ */
+function showRandomContent(isBackside = false) {
+  const key = getElement('spreadSelector').value;
+  const isBlocks = key === 'blocks';
+
+  // 更新時間顯示
+  updateDrawTime(isBlocks ? '擲筊時間' : '抽牌時間');
+
+  // 擲筊模式
+  if (isBlocks) {
+    resetBlocks();
+    getElement('blocksArea').classList.remove('hidden');
+    getElement('cardArea').classList.add('hidden');
+    getDrawBtn().textContent = '擲筊';
+    getShuffleBtn().textContent = '重來';
+
+    if (!isBackside) {
+      playShuffleAnimation(getElement('blocksArea'), tossBlocks);
+    }
     return;
   }
-  // 選出卡片容器（單／多都用同一個 container）
-  const container =
-    key === "twelve"
-      ? document.getElementById("twelveContainer")
-      : document.getElementById("cardContainer");
+
+  // 牌陣模式
+  getElement('blocksArea').classList.add('hidden');
+  getElement('cardArea').classList.remove('hidden');
+  getDrawBtn().textContent = '抽牌';
+  getShuffleBtn().textContent = '洗牌';
+
+  const spread = SPREAD_CONFIG[key];
+
+  // 預抽牌
+  let mains = [],
+    sups = [],
+    lifes = [],
+    extraCard = null,
+    palaceNames = null;
+
+  if (!isBackside) {
+    fetchViewStats();
+
+    const mainCount = spread.main + (spread.extra || 0);
+    const uniqueMain = dealUnique(shuffle(CONTENT_MAIN), mainCount);
+    mains = uniqueMain.slice(0, spread.main);
+    extraCard = spread.extra > 0 ? uniqueMain[spread.main] : null;
+    sups =
+      spread.support > 0
+        ? dealUnique(shuffle(CONTENT_SUPPORT), spread.support)
+        : [];
+    lifes =
+      spread.life > 0 ? dealUnique(shuffle(CONTENT_LIFE), spread.life) : [];
+
+    if (key === 'twelve') {
+      palaceNames = generateRandomPalaceOrder();
+    }
+  }
+
+  const renderParams = {
+    key,
+    mains,
+    sups,
+    lifes,
+    palaceNames,
+    extraCard,
+    spread,
+  };
+
+  // 抽牌流程：背面 → 搖晃 → 翻面
+  if (!isBackside) {
+    const container = renderCards({ ...renderParams, showBack: true });
+    playShuffleAnimation(container, () => {
+      playFlipAnimation(
+        container,
+        () => renderCards({ ...renderParams, showBack: false }),
+        null
+      );
+    });
+  } else {
+    const container = renderCards({ ...renderParams, showBack: true });
+    playShuffleAnimation(container);
+  }
+}
+
+/**
+ * 洗牌預覽
+ */
+function shufflePreview() {
+  const key = getElement('spreadSelector').value;
+  const isBlocks = key === 'blocks';
+
+  if (isBlocks) {
+    playShuffleAnimation(getElement('blocksArea'), resetBlocks);
+    updateDrawTime('擲筊時間');
+    return;
+  }
 
   showRandomContent(true);
 }
+
+/**
+ * 儲存牌面截圖
+ */
 function saveCardScreen() {
-  console.log("儲存牌面");
-  const key = document.getElementById("spreadSelector").value;
-  const label = (key === "blocks") ? "擲筊時間" : "抽牌時間";
+  const key = getElement('spreadSelector').value;
+  const isBlocks = key === 'blocks';
+  const label = isBlocks ? '擲筊時間' : '抽牌時間';
 
-  const container_card =
-    key === "twelve"
-      ? document.getElementById("twelveContainer")
-      : document.getElementById("cardContainer");
+  // 取得容器
+  const container = isBlocks
+    ? getElement('blocksArea')
+    : key === 'twelve'
+    ? getElement('twelveContainer')
+    : getElement('cardContainer');
 
-  if (key === "blocks") {
-    container = document.getElementById("blocksArea");
-  } else {
-    container = container_card;
-  }
-
-  // 產生抽牌時間
-  const dateObj = lastDrawTimestamp || new Date();
-  const pad = (n) => n.toString().padStart(2, "0");
-  const yyyy = dateObj.getFullYear();
-  const MM = pad(dateObj.getMonth() + 1);
-  const dd = pad(dateObj.getDate());
-  const hh = pad(dateObj.getHours());
-  const mm = pad(dateObj.getMinutes());
-  const ss = pad(dateObj.getSeconds());
-  const timestamp = `${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
+  // 產生時間戳
+  const timestamp = formatDateTime(lastDrawTimestamp || new Date());
   const timestampText = `${label}：${timestamp}`;
 
   // 取得問題文字
-  var questionText = document.getElementById("questionInput").value;
+  let questionText = getElement('questionInput').value;
+  const displayQuestion = questionText ? `問題: ${questionText}` : '';
 
-  var spread = "擲筊";
+  // 產生檔名
+  const spreadName = SPREAD_NAMES[key] || '未知';
+  const filename = `紫微牌卡_${spreadName}_${questionText}_${timestamp}.png`;
 
-  if (key === "single") spread = "一張牌陣";
-  else if (key == "two") spread = "二張牌陣";
-  else if (key == "basicThree") spread = "三張基礎牌陣";
-  else if (key == "opposition") spread = "對宮牌陣";
-  else if (key == "threeFour") spread = "三方四正牌陣";
-  else if (key == "twelve") spread = "十二宮位大牌陣";
-  const filename = `紫微牌卡_${spread}_${questionText}_${timestamp}.png`;
-
-  // 加入浮水印到真實容器上
-  const timeOverlay = document.createElement("div");
-  timeOverlay.textContent = timestampText;
-  Object.assign(timeOverlay.style, {
-    position: "absolute",
-    right: "4px",
-    bottom: "4px",
-    fontSize: "14px",
-    fontWeight: "bold",
-    background: "rgba(255,255,255,0.85)",
-    padding: "4px 8px",
-    borderRadius: "4px",
-    zIndex: "99",
-    pointerEvents: "none",
-  });
-
-  if (questionText != "") {
-    questionText = "問題: " + questionText;
-  }
-  // 建立問題文字浮水印（左上角）
-  const questionOverlay = document.createElement("div");
-  questionOverlay.textContent = questionText;
-
+  // 使用 html2canvas 截圖
   html2canvas(container, {
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
     onclone: (doc) => {
-      // 這裡的 doc 是整個被複製的文件，container 的所有子結構都在其中
       const cloned = doc.getElementById(container.id);
+      cloned.style.position = 'relative';
+
       // 時間浮水印
-      const timeDiv = doc.createElement("div");
+      const timeDiv = doc.createElement('div');
       timeDiv.textContent = timestampText;
-      Object.assign(timeDiv.style, {
-        position: "absolute",
-        right: "4px",
-        bottom: "4px",
-        fontSize: "14px",
-        fontWeight: "bold",
-        background: "rgba(255,255,255,0.85)",
-        fontFamily: "'Noto Sans TC', sans-serif",
-        padding: "4px 8px",
-        borderRadius: "4px",
-        pointerEvents: "none",
-      });
-      // 問題文字浮水印
-      const qDiv = doc.createElement("div");
-      qDiv.textContent = questionText;
-      Object.assign(qDiv.style, {
-        position: "absolute",
-        left: "4px",
-        top: "4px",
-        fontSize: "20px",
-        fontWeight: "bold",
-        background: "rgba(255,255,255,0.85)",
-        fontFamily: "'Noto Sans TC', sans-serif",
-        padding: "4px 8px",
-        borderRadius: "4px",
-        pointerEvents: "none",
-      });
-      // 加到 clone 上
-      cloned.style.position = "relative";
+      Object.assign(
+        timeDiv.style,
+        createWatermarkStyle({ right: '4px', bottom: '4px' }, 14)
+      );
       cloned.appendChild(timeDiv);
+
+      // 問題文字浮水印
+      const qDiv = doc.createElement('div');
+      qDiv.textContent = displayQuestion;
+      Object.assign(
+        qDiv.style,
+        createWatermarkStyle({ left: '4px', top: '4px' }, 20)
+      );
       cloned.appendChild(qDiv);
     },
   })
-    .then((canvas) => {
-      const ua = navigator.userAgent;
-      const isiOS = /iP(hone|ad|od)/.test(ua);
-      const isSafari = /Safari/.test(ua) && !/Chrome/.test(ua);
-
-      if (isiOS && isSafari) {
-        canvas.toBlob(async (blob) => {
-          const file = new File([blob], filename, { type: "image/png" });
-          if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            try {
-              await navigator.share({
-                files: [file],
-                title: "",
-                text: "",
-              });
-            } catch (err) {
-              openImageInNewTab(blob, filename);
-            }
-          } else {
-            openImageInNewTab(blob, filename);
-          }
-        }, "image/png");
-      } else {
-        const link = document.createElement("a");
-        link.download = filename;
-        link.href = canvas.toDataURL("image/png");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
-    })
+    .then((canvas) => downloadOrShareCanvas(canvas, filename))
     .catch((err) => {
-      console.error("截圖失敗：", err);
-      alert("儲存畫面失敗，請稍候再試");
-    })
-    .finally(() => {
-      // 移除浮水印
-  if (timeOverlay.parentNode) timeOverlay.parentNode.removeChild(timeOverlay);
-  if (questionOverlay.parentNode) questionOverlay.parentNode.removeChild(questionOverlay);
+      console.error('截圖失敗：', err);
+      alert('儲存畫面失敗，請稍候再試');
     });
+}
 
-  function openImageInNewTab(blob, name) {
-    const url = URL.createObjectURL(blob);
-    const w = window.open();
-    w.document.write(`
-              <img src="${url}" style="max-width:100%;height:auto;" alt="${name}">
-          `);
+/**
+ * 下載或分享 Canvas 圖片（處理 iOS Safari 特殊邏輯）
+ * @param {HTMLCanvasElement} canvas - 畫布元素
+ * @param {string} filename - 檔案名稱
+ */
+function downloadOrShareCanvas(canvas, filename) {
+  const ua = navigator.userAgent;
+  const isiOS = /iP(hone|ad|od)/.test(ua);
+  const isSafari = /Safari/.test(ua) && !/Chrome/.test(ua);
+
+  if (isiOS && isSafari) {
+    canvas.toBlob(async (blob) => {
+      const file = new File([blob], filename, { type: 'image/png' });
+      if (navigator.canShare?.({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], title: '', text: '' });
+        } catch {
+          openImageInNewTab(blob, filename);
+        }
+      } else {
+        openImageInNewTab(blob, filename);
+      }
+    }, 'image/png');
+  } else {
+    const link = document.createElement('a');
+    link.download = filename;
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 }
 
-// 1. 定義 API 端點與您的金鑰
-const COUNTER_UP_API_URL =
-  "https://api.counterapi.dev/v2/ziweicards/ziweicards/up";
+/**
+ * 在新分頁開啟圖片
+ * @param {Blob} blob - 圖片 Blob
+ * @param {string} name - 圖片名稱
+ */
+function openImageInNewTab(blob, name) {
+  const url = URL.createObjectURL(blob);
+  const w = window.open();
+  w.document.write(
+    `<img src="${url}" style="max-width:100%;height:auto;" alt="${name}">`
+  );
+}
 
-// 2. 建立一個非同步函式，呼叫 API 並更新畫面上的數字
+/**
+ * 呼叫統計 API 記錄瀏覽次數
+ */
 async function fetchViewStats() {
   try {
-    const res = await fetch(COUNTER_UP_API_URL, {
-      method: "GET",
-    });
+    const res = await fetch(COUNTER_API_URL, { method: 'GET' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    console.debug("累計抽牌次數：", (parseInt(data.data.up_count) + 2) / 2);
+    console.debug('累計抽牌次數：', (parseInt(data.data.up_count) + 2) / 2);
   } catch (e) {
-    console.error("取得瀏覽統計失敗：", e);
+    console.error('取得瀏覽統計失敗：', e);
   }
 }
 
-// 頁面載入預設背面三張
+// ===== 初始化 =====
 window.onload = () => {
   showRandomContent(true);
+
+  // 使用 addEventListener 取代 inline handlers
+  getElement('spreadSelector').addEventListener('change', () =>
+    showRandomContent(true)
+  );
+  getElement('drawBtn').addEventListener('click', () => showRandomContent());
+  getElement('shuffleBtn').addEventListener('click', shufflePreview);
+  getElement('saveBtn').addEventListener('click', saveCardScreen);
 };
