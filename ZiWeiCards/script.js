@@ -139,7 +139,7 @@ const SPREAD_NAMES = {
   blocks: '擲筊',
   single: '一張牌陣',
   two: '二張牌陣',
-  basicThree: '三張基礎牌陣',
+  basicThree: '基礎牌陣',
   opposition: '對宮牌陣',
   threeFour: '三方四正牌陣',
   twelve: '十二宮位大牌陣',
@@ -857,29 +857,137 @@ function saveCardScreen() {
   const filename = `紫微牌卡_${spreadName}_${questionText}_${timestamp}.png`;
 
   // 使用 html2canvas 截圖
+  // 使用 html2canvas 截圖
   html2canvas(container, {
-    backgroundColor: '#ffffff',
+    backgroundColor: null, // 設為 null 以使用 CSS 背景
     onclone: (doc) => {
       const cloned = doc.getElementById(container.id);
       cloned.style.position = 'relative';
 
-      // 時間浮水印
-      const timeDiv = doc.createElement('div');
-      timeDiv.textContent = timestampText;
-      Object.assign(
-        timeDiv.style,
-        createWatermarkStyle({ right: '4px', bottom: '4px' }, 14)
-      );
-      cloned.appendChild(timeDiv);
+      // 1. 設定背景：優雅的暖色米白底，避免漸層截圖破圖
+      cloned.style.background = '#fdfbf7';
+      cloned.style.backgroundColor = '#fdfbf7';
+      // 增加上方留白至 120px 以容納標題，避免壓到牌卡
+      cloned.style.padding = '120px 40px 80px';
+      cloned.style.borderRadius = '0'; // 移除圓角，使其像一張文件
+      cloned.style.boxSizing = 'border-box';
+      // 清除原本的 Box Shadow 與 Border，避免干擾
+      cloned.style.boxShadow = 'none';
+      cloned.style.border = 'none';
 
-      // 問題文字浮水印
-      const qDiv = doc.createElement('div');
-      qDiv.textContent = displayQuestion;
-      Object.assign(
-        qDiv.style,
-        createWatermarkStyle({ left: '4px', top: '4px' }, 20)
+      // 2. 插入標題 (Header)
+      const headerDiv = doc.createElement('div');
+      headerDiv.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+        border-bottom: 2px solid rgba(139, 92, 246, 0.2);
+      `;
+
+      const titleEl = doc.createElement('h2');
+      titleEl.textContent = `紫微斗數 - ${spreadName}`;
+      titleEl.style.cssText = `
+        margin: 0;
+        color: #4c1d95; /* extremely dark purple */
+        font-family: 'Noto Serif TC', serif;
+        font-size: 32px; /* 加大標題字體 */
+        letter-spacing: 2px;
+      `;
+      headerDiv.appendChild(titleEl);
+      cloned.insertBefore(headerDiv, cloned.firstChild);
+
+      // 3. 處理內容元素樣式
+      const backgroundElements = cloned.querySelectorAll(
+        '.palace-cell, .center-area, .card, .group, .group-main, .group-support, .group-life, .group-top, .group-bottom, .group-left, .group-right, .blocks-area'
       );
-      cloned.appendChild(qDiv);
+      backgroundElements.forEach((el) => {
+        // 卡片容器改為半透明白底
+        el.style.background = 'rgba(255, 255, 255, 0.6)';
+        el.style.backgroundColor = 'rgba(255, 255, 255, 0.6)';
+        // 優雅的紫色邊框
+        el.style.borderColor = 'rgba(139, 92, 246, 0.3)';
+        el.style.borderRadius = '8px';
+      });
+
+      // 4. 文字顏色優化
+      const allText = cloned.querySelectorAll(
+        'p, p2, span, .palace-label, .branch-label, .center-label, .blocks-result, .block-label'
+      );
+      allText.forEach((el) => {
+        el.style.color = '#1f2937'; // gray-800
+        el.style.textShadow = 'none';
+
+        if (el.classList.contains('branch-label')) {
+          el.style.color = '#b45309'; // dark amber
+        }
+        if (el.classList.contains('palace-label')) {
+          el.style.color = '#1e3a8a'; // dark blue
+        }
+        if (el.classList.contains('blocks-result')) {
+          el.style.color = '#b45309'; // dark amber
+        }
+        if (el.classList.contains('block-label')) {
+          el.style.color = '#b45309'; // dark amber
+        }
+      });
+
+      // 5. 圖片樣式優化
+      const allImages = cloned.querySelectorAll('img');
+      allImages.forEach((img) => {
+        img.style.borderColor = '#9ca3af';
+        img.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+      });
+
+      // 6. 插入頁尾 (Footer)
+      const footerDiv = doc.createElement('div');
+      footerDiv.style.cssText = `
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 15px 40px;
+        background: rgba(255, 255, 255, 0.8);
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: 'Noto Sans TC', sans-serif;
+        font-size: 20px; /* 加大頁尾字體 */
+        color: #4b5563;
+      `;
+
+      // 左側：問題
+      const leftInfo = doc.createElement('div');
+      if (questionText) {
+        leftInfo.innerHTML = `<span style="color: #6d28d9; font-weight: bold;">問題：</span>${questionText}`;
+      } else {
+        leftInfo.innerHTML = `<span style="color: #6d28d9; font-weight: bold;">誠心祈求</span>`;
+      }
+
+      // 右側：只保留時間，移除品牌文字
+      const rightInfo = doc.createElement('div');
+      rightInfo.style.textAlign = 'right';
+      rightInfo.innerHTML = `
+        <div style="font-weight: 500;">${timestamp}</div>
+      `;
+
+      footerDiv.appendChild(leftInfo);
+      footerDiv.appendChild(rightInfo);
+      cloned.appendChild(footerDiv);
+
+      // 移除原有的裝飾性元素
+      const style = doc.createElement('style');
+      style.innerHTML = `
+        #${container.id}::before { content: none !important; }
+        .center-area::before { display: none !important; }
+      `;
+      cloned.appendChild(style);
     },
   })
     .then((canvas) => downloadOrShareCanvas(canvas, filename))

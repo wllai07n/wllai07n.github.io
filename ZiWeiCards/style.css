@@ -635,9 +635,22 @@ h1 {
   width: 300px;
 }
 
-/* 三張牌陣 */
+/* 三張牌陣 - 全域設定 (確保不換行) */
+#cardContainer.basicThree {
+  flex-wrap: nowrap; /* 確保不管寬度如何都不換行 */
+}
+
+/* 三張牌陣圖片 */
 #cardContainer.basicThree .card img {
-  width: 250px;
+  width: 100%;       /* 自適應寬度 */
+  max-width: 250px;  /* 最大寬度限制 */
+  min-width: 0;      /* 允許縮小 */
+}
+
+#cardContainer.basicThree .card {
+  flex: 1;           /* 讓卡片平均分配空間 */
+  min-width: 0;      /* 防止內容撐開容器 */
+  margin: 0 var(--spacing-sm); /* 適度間距 */
 }
 
 /* 8.3 對宮牌陣 */
@@ -965,7 +978,7 @@ h1 {
   }
 
   .branch-label {
-    font-size: 1.2rem;
+    font-size: 1.7rem;
   }
 
   .palace-label {
@@ -1010,7 +1023,7 @@ h1 {
   }
 
   .branch-label {
-    font-size: 0.85rem;
+    font-size: 1.1rem;
     top: 5px;
     right: 6px;
   }
@@ -1229,6 +1242,14 @@ h1 {
     flex-direction: column;
   }
 
+  /* 強制按鈕群組保持橫向排列 */
+  .control-group.btn-group {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: 100%;
+  }
+
   #questionInput {
     max-width: 100%;
   }
@@ -1236,10 +1257,15 @@ h1 {
   .btn {
     padding: 12px 20px;
     font-size: 1rem;
+    white-space: nowrap; /* 防止按鈕文字換行 */
+    flex: 1; /* 讓按鈕平均分配寬度 */
+    min-width: 0; /* 允許縮小 */
+    padding: 12px 10px; /* 縮小內距以適應小螢幕 */
   }
 
   .divider {
-    display: none;
+    display: flex; /* 恢復顯示分隔線 */
+    margin: 0 4px; /* 縮小分隔線間距 */
   }
 
   #cardContainer {
@@ -1247,9 +1273,37 @@ h1 {
   }
 
   #cardContainer.single .card img,
-  #cardContainer.two .card img,
-  #cardContainer.basicThree .card img {
+  #cardContainer.two .card img {
     width: 200px;
+  }
+
+  /* 三張牌陣：手機版強制橫向排列 (修正垂直堆疊問題) */
+  #cardContainer.basicThree {
+    flex-wrap: nowrap;
+    gap: 6px;
+    padding: var(--spacing-md);
+    align-items: flex-start;
+  }
+
+  #cardContainer.basicThree .card {
+    flex: 1;
+    margin: 0;
+    min-width: 0;
+    width: 32%;
+  }
+
+  #cardContainer.basicThree .card img {
+    width: 100%;
+    height: auto;
+    max-width: none;
+  }
+
+  #cardContainer.basicThree .card p,
+  #cardContainer.basicThree .card p2 {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    margin-top: 6px;
+    display: block; /* Ensure it behaves like a block if not already */
   }
 }
 
