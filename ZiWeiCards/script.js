@@ -860,15 +860,20 @@ function saveCardScreen() {
   // 使用 html2canvas 截圖
   html2canvas(container, {
     backgroundColor: null, // 設為 null 以使用 CSS 背景
+    scale: 2, // 提升解析度
+    windowWidth: 1024, // 模擬電腦版視窗寬度
     onclone: (doc) => {
       const cloned = doc.getElementById(container.id);
       cloned.style.position = 'relative';
+      // 強制設定寬度，確保排版一致（解決手機版擠壓問題）
+      cloned.style.width = '1024px';
+      cloned.style.minWidth = '1024px';
 
       // 1. 設定背景：優雅的暖色米白底，避免漸層截圖破圖
       cloned.style.background = '#fdfbf7';
       cloned.style.backgroundColor = '#fdfbf7';
-      // 增加上方留白至 120px 以容納標題，避免壓到牌卡
-      cloned.style.padding = '120px 40px 80px';
+      // 增加上方留白至 120px 以容納標題，下方增加至 100px 避免壓到頁尾
+      cloned.style.padding = '120px 40px 100px';
       cloned.style.borderRadius = '0'; // 移除圓角，使其像一張文件
       cloned.style.boxSizing = 'border-box';
       // 清除原本的 Box Shadow 與 Border，避免干擾
@@ -958,7 +963,7 @@ function saveCardScreen() {
         justify-content: space-between;
         align-items: center;
         font-family: 'Noto Sans TC', sans-serif;
-        font-size: 20px; /* 加大頁尾字體 */
+        font-size: 16px; /* 調整頁尾字體大小至適中 */
         color: #4b5563;
       `;
 
