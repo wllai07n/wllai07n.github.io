@@ -218,7 +218,7 @@ h1 {
   flex-wrap: wrap;
   width: 100%;
   max-width: 1400px;
-  margin: 0 auto var(--spacing-xl);
+  margin: 0 auto var(--spacing-md);
   padding: var(--spacing-md) var(--spacing-xl);
   gap: var(--spacing-md);
   background: var(--gradient-card);
@@ -296,7 +296,7 @@ h1 {
   gap: var(--spacing-xl);
   width: 100%;
   max-width: 1400px;
-  margin: 0 auto var(--spacing-2xl);
+  margin: 0 auto var(--spacing-md);
   padding: var(--spacing-2xl);
   background: var(--gradient-card);
   backdrop-filter: blur(20px);
@@ -506,7 +506,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: var(--spacing-md);
+  margin-top: 0;
 }
 
 .card-wrapper img {
@@ -542,7 +542,7 @@ h1 {
   display: block;
   width: 100%;
   max-width: 1400px;
-  margin: var(--spacing-xl) auto var(--spacing-md);
+  margin: var(--spacing-xs) auto var(--spacing-xs);
   padding: var(--spacing-md) var(--spacing-xl);
   font-size: 1.3rem;
   font-weight: 600;
@@ -608,7 +608,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-xl);
-  margin-top: var(--spacing-xl);
+  margin-top: var(--spacing-sm);
   padding: var(--spacing-3xl);
   background: var(--gradient-card);
   backdrop-filter: blur(10px);
@@ -748,6 +748,7 @@ h1 {
   gap: 0;
   width: 100%;
   max-width: 1400px;
+  min-width: 1200px; /* 強制電腦版寬度 */
   margin: 60px auto 0;
   background: linear-gradient(
     145deg,
@@ -997,59 +998,7 @@ h1 {
   }
 }
 
-@media (max-width: 768px) {
-  #twelveContainer.twelve {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .palace-cell,
-  #twelveContainer.twelve .group-pos {
-    min-height: 130px;
-    padding: 10px 6px;
-    flex-direction: column;
-  }
-
-  .palace-cell .card img,
-  #twelveContainer.twelve .group-pos img,
-  #twelveContainer.twelve img {
-    width: 55px;
-  }
-
-  .palace-cell .card p,
-  #twelveContainer.twelve .group-pos p {
-    font-size: 0.75rem;
-  }
-
-  .center-area {
-    min-height: 220px;
-    gap: 25px;
-    flex-direction: column;
-  }
-
-  .center-main img,
-  .center-life img,
-  #twelveContainer.twelve .center-main img,
-  #twelveContainer.twelve .center-life img {
-    width: 70px;
-  }
-
-  .branch-label {
-    font-size: 1.1rem;
-    top: 5px;
-    right: 6px;
-  }
-
-  .palace-label {
-    font-size: 1.1rem;
-    bottom: 5px;
-    left: 6px;
-  }
-
-  #twelveContainer.twelve::before {
-    font-size: 0.85rem;
-    padding: 5px 18px;
-  }
-}
+/* 十二宮位響應式樣式已移至檔案末尾的 @media 區塊 */
 
 /* ============================================================================
    10. 擲筊區塊
@@ -1340,6 +1289,151 @@ h1 {
     margin-top: 6px;
     display: block; /* Ensure it behaves like a block if not already */
   }
+
+  /* 對宮牌陣：手機版橫向排列 */
+  #cardContainer.opposition {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  #cardContainer.opposition .group-main,
+  #cardContainer.opposition .group-support,
+  #cardContainer.opposition .group-life {
+    flex-direction: row;
+    gap: var(--spacing-xs);
+  }
+
+  #cardContainer.opposition .card {
+    margin: 0 2px;
+  }
+
+  #cardContainer.opposition .card img {
+    width: 60px;
+  }
+
+  #cardContainer.opposition .card p,
+  #cardContainer.opposition .card p2 {
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+
+  /* 三方四正牌陣：手機版簡化為 2x3 網格 */
+  #cardContainer.threeFour {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      'top    life'
+      'left   right'
+      'bottom bottom';
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+  }
+
+  #cardContainer.threeFour .group-top,
+  #cardContainer.threeFour .group-bottom,
+  #cardContainer.threeFour .group-left,
+  #cardContainer.threeFour .group-right,
+  #cardContainer.threeFour .group-life {
+    flex-direction: row;
+    gap: 4px;
+  }
+
+  #cardContainer.threeFour .card img {
+    width: 55px;
+  }
+
+  #cardContainer.threeFour .card p,
+  #cardContainer.threeFour .card p2 {
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+
+  /* =============================================
+     十二宮位大牌陣：手機版極致精簡
+     使用 nth-child 明確設定每個子元素的 Grid 位置
+     DOM 順序：辰、巳、午、未、卯、center、申、寅、酉、丑、子、亥、戌
+     ============================================= */
+  #twelveContainer.twelve {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-rows: repeat(4, 1fr) !important; /* 強制行高一致，避免塌陷 */
+    gap: 2px !important;
+    margin-top: 30px;
+    padding: 4px;
+    border-width: 2px;
+  }
+
+  /* 第 1 行：辰、巳、午、未 */
+  #twelveContainer.twelve > *:nth-child(1) {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  } /* 辰 */
+  #twelveContainer.twelve > *:nth-child(2) {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+  } /* 巳 */
+  #twelveContainer.twelve > *:nth-child(3) {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+  } /* 午 */
+  #twelveContainer.twelve > *:nth-child(4) {
+    grid-column: 4 !important;
+    grid-row: 1 !important;
+  } /* 未 */
+
+  /* 第 2 行：卯、(center 佔 2-3 列)、申 */
+  #twelveContainer.twelve > *:nth-child(5) {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+  } /* 卯 */
+  #twelveContainer.twelve > *:nth-child(6) {
+    grid-column: 2 / 4 !important;
+    grid-row: 2 / 4 !important;
+  } /* center-area */
+  #twelveContainer.twelve > *:nth-child(7) {
+    grid-column: 4 !important;
+    grid-row: 2 !important;
+  } /* 申 */
+
+  /* 第 3 行：寅、(center 已佔據)、酉 */
+  #twelveContainer.twelve > *:nth-child(8) {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+  } /* 寅 */
+  #twelveContainer.twelve > *:nth-child(9) {
+    grid-column: 4 !important;
+    grid-row: 3 !important;
+  } /* 酉 */
+
+  /* 第 4 行：丑、子、亥、戌 */
+  #twelveContainer.twelve > *:nth-child(10) {
+    grid-column: 1 !important;
+    grid-row: 4 !important;
+  } /* 丑 */
+  #twelveContainer.twelve > *:nth-child(11) {
+    grid-column: 2 !important;
+    grid-row: 4 !important;
+  } /* 子 */
+  #twelveContainer.twelve > *:nth-child(12) {
+    grid-column: 3 !important;
+    grid-row: 4 !important;
+  } /* 亥 */
+  #twelveContainer.twelve > *:nth-child(13) {
+    grid-column: 4 !important;
+    grid-row: 4 !important;
+  } /* 戌 */
+
+  #twelveContainer.twelve .palace-cell {
+    min-height: 80px;
+    padding: 4px 2px;
+    flex-direction: column;
+    gap: 2px;
+  }
+  /* 十二宮位響應式樣式已移除，強制固定寬度 */
 }
 
 /* ============================================================================
