@@ -1,6 +1,9 @@
 /**
  * ZiWeiCards - 紫微牌卡應用程式
- * Refactored for modularity and maintainability.
+ * @file 主程式入口，提供抽牌、洗牌、擲筊、儲存牌面等功能
+ * @author 沐心紫微
+ * @version 2.0.0
+ * @description 重構版本 - 提升模組化與可維護性
  */
 
 // ============================================================
@@ -167,6 +170,20 @@ const CONFIG = {
 
   // API
   COUNTER_API_URL: 'https://api.counterapi.dev/v2/ziweicards/ziweicards/up',
+
+  // 動畫時間設定 (毫秒)
+  ANIMATION: {
+    SHAKE_DURATION: 600,
+    FLIP_DURATION: 600,
+    FLIP_HALFWAY: 280,
+  },
+
+  // 截圖設定
+  SCREENSHOT: {
+    SCALE: 2,
+    WINDOW_WIDTH: 1024,
+    BG_COLOR: '#fdfbf7',
+  },
 };
 
 // ============================================================
@@ -181,8 +198,17 @@ const State = {
 // 3. 工具函式 (Utilities & Helpers)
 // ============================================================
 
+/**
+ * 工具函式模組
+ * @namespace Utils
+ */
 const Utils = {
-  /** Fisher-Yates 洗牌 */
+  /**
+   * 使用 Fisher-Yates 演算法洗牌
+   * @param {Array<T>} arr - 待洗牌的陣列
+   * @returns {Array<T>} 新的已洗牌陣列（不修改原陣列）
+   * @template T
+   */
   shuffle(arr) {
     const result = arr.slice();
     for (let i = result.length - 1; i > 0; i--) {
@@ -192,7 +218,11 @@ const Utils = {
     return result;
   },
 
-  /** 格式化日期時間 */
+  /**
+   * 格式化日期時間為 YYYY/MM/DD HH:mm:ss 格式
+   * @param {Date} date - 日期物件
+   * @returns {string} 格式化後的日期時間字串
+   */
   formatDateTime(date) {
     const pad = (n) => n.toString().padStart(2, '0');
     return `${date.getFullYear()}/${pad(date.getMonth() + 1)}/${pad(
@@ -202,17 +232,50 @@ const Utils = {
     )}`;
   },
 
-  /** 產生亂數索引 */
+  /**
+   * 產生 0 到 max-1 之間的隨機整數
+   * @param {number} max - 上限值（不含）
+   * @returns {number} 隨機整數
+   */
   randomInt(max) {
     return Math.floor(Math.random() * max);
   },
 };
 
+/**
+ * DOM 操作輔助模組（含快取機制）
+ * @namespace DomHelper
+ */
 const DomHelper = {
+  /** @type {Map<string, HTMLElement>} DOM 元素快取 */
+  _cache: new Map(),
+
+  /**
+   * 取得 DOM 元素（含快取）
+   * @param {string} id - 元素 ID
+   * @returns {HTMLElement|null} DOM 元素
+   */
   get(id) {
-    return document.getElementById(id);
+    if (!this._cache.has(id)) {
+      this._cache.set(id, document.getElementById(id));
+    }
+    return this._cache.get(id);
   },
 
+  /**
+   * 清除 DOM 快取（若 DOM 動態變化時使用）
+   */
+  clearCache() {
+    this._cache.clear();
+  },
+
+  /**
+   * 建立新的 DOM 元素
+   * @param {string} tag - 標籤名稱
+   * @param {string} [className=''] - CSS 類別
+   * @param {string} [text=''] - 文字內容
+   * @returns {HTMLElement} 新建立的元素
+   */
   create(tag, className = '', text = '') {
     const el = document.createElement(tag);
     if (className) el.className = className;
@@ -225,8 +288,19 @@ const DomHelper = {
 // 4. 資料模組 (Data Module)
 // ============================================================
 
+/**
+ * 資料管理模組
+ * @namespace DataModule
+ */
 const DataModule = {
-  /** 產生牌卡 Raw Data (正/倒) */
+  /** @type {{main: Array, support: Array, life: Array}} 牌庫資料 */
+  decks: null,
+
+  /**
+   * 產生牌卡 Raw Data（包含正牌與倒牌）
+   * @param {string[]} names - 牌卡名稱陣列
+   * @returns {Array<{image: string, text: string}>} 牌卡資料陣列
+   */
   generateRawData(names) {
     const cards = [];
     names.forEach((name) => {
@@ -236,7 +310,9 @@ const DataModule = {
     return cards;
   },
 
-  /** 取得初始化後的牌庫 */
+  /**
+   * 初始化所有牌庫
+   */
   initDecks() {
     this.decks = {
       main: this.generateRawData(CONFIG.MAIN_CARD_NAMES),
@@ -245,23 +321,49 @@ const DataModule = {
     };
   },
 
-  /** 抽取不重複牌卡 */
+  /**
+   * 抽取不重複牌卡（使用部分洗牌策略優化效能）
+   * @param {Array<{image: string, text: string}>} deck - 牌庫
+   * @param {number} count - 抽取數量
+   * @returns {Array<{image: string, text: string}>} 抽取的牌卡陣列
+   */
   dealUnique(deck, count) {
-    const shuffled = Utils.shuffle(deck);
+    // 防禦性檢查：無效牌庫
+    if (!Array.isArray(deck) || deck.length === 0) {
+      console.warn('dealUnique: 牌庫無效或為空');
+      return [];
+    }
+    // 防禦性檢查：無效數量
+    if (count <= 0) {
+      return [];
+    }
+
+    // 效能優化：使用部分洗牌策略，僅隨機選擇所需數量
+    // 避免對整副牌進行完整 Fisher-Yates 洗牌 O(n) → O(k)
     const result = [];
     const seenBases = new Set();
+    const deckCopy = deck.slice();
 
-    for (const card of shuffled) {
+    while (result.length < count && deckCopy.length > 0) {
+      const i = Utils.randomInt(deckCopy.length);
+      const card = deckCopy[i];
       const baseName = card.text.split('-')[0];
+
+      // 使用 swap-and-pop 實現 O(1) 移除
+      deckCopy[i] = deckCopy[deckCopy.length - 1];
+      deckCopy.pop();
+
       if (seenBases.has(baseName)) continue;
       seenBases.add(baseName);
       result.push(card);
-      if (result.length === count) break;
     }
     return result;
   },
 
-  /** 產生十二宮隨機順序 */
+  /**
+   * 產生十二宮隨機順序
+   * @returns {string[]} 隨機排列的十二宮名稱陣列
+   */
   generatePalaceOrder() {
     const startIdx = Utils.randomInt(12);
     const order = new Array(12);
@@ -472,14 +574,22 @@ const RenderModule = {
     },
   },
 
-  /** 主要渲染入口 */
+  /**
+   * 主要渲染入口
+   * @param {string} key - 牌陣類型的 key
+   * @param {Object} context - 渲染上下文
+   * @param {Object} context.data - 牌卡資料
+   * @param {boolean} context.showBack - 是否顯示背面
+   * @returns {HTMLElement} 渲染後的容器元素
+   */
   render(key, context) {
     const cardCt = DomHelper.get('cardContainer');
     const twelveCt = DomHelper.get('twelveContainer');
 
-    // Cleanup
-    cardCt.innerHTML = '';
-    twelveCt.innerHTML = '';
+    // 效能優化：使用 replaceChildren() 取代 innerHTML = ''
+    // 減少強制重排 (reflow) 次數
+    cardCt.replaceChildren();
+    twelveCt.replaceChildren();
     cardCt.style.display = 'none';
     twelveCt.style.display = 'none';
 
@@ -496,14 +606,17 @@ const RenderModule = {
     }
     container.className = key;
 
-    const strategy =
-      this.SpreadStrategies[
-      key === 'twelve' || key === 'opposition' || key === 'threeFour'
-        ? key
-        : 'simple'
-      ];
+    // 使用物件映射替代多重條件判斷
+    const strategyMap = {
+      twelve: 'twelve',
+      opposition: 'opposition',
+      threeFour: 'threeFour',
+    };
+    const strategyKey = strategyMap[key] || 'simple';
+    const strategy = this.SpreadStrategies[strategyKey];
+
     if (strategy) {
-      strategy(container, { ...context, key }); // Pass context down
+      strategy(container, { ...context, key });
     }
 
     return container;
@@ -514,24 +627,39 @@ const RenderModule = {
 // 6. 動畫模組 (Animation Module)
 // ============================================================
 
+/**
+ * 動畫模組
+ * @namespace AnimationModule
+ */
 const AnimationModule = {
+  /**
+   * 執行搖晃動畫（洗牌效果）
+   * @param {HTMLElement} container - 目標容器
+   * @param {Function} [callback] - 動畫完成後的回呼
+   */
   shake(container, callback) {
     container.classList.add('shuffling');
     setTimeout(() => {
       container.classList.remove('shuffling');
       if (callback) callback();
-    }, 600);
+    }, CONFIG.ANIMATION.SHAKE_DURATION);
   },
 
+  /**
+   * 執行翻牌動畫
+   * @param {HTMLElement} container - 目標容器
+   * @param {Function} [onHalfway] - 動畫進行到一半時的回呼（用於切換牌面）
+   * @param {Function} [onComplete] - 動畫完成後的回呼
+   */
   flip(container, onHalfway, onComplete) {
     container.classList.add('flipping');
     setTimeout(() => {
       if (onHalfway) onHalfway();
-    }, 280);
+    }, CONFIG.ANIMATION.FLIP_HALFWAY);
     setTimeout(() => {
       container.classList.remove('flipping');
       if (onComplete) onComplete();
-    }, 600);
+    }, CONFIG.ANIMATION.FLIP_DURATION);
   },
 };
 
@@ -762,7 +890,18 @@ const ZiWeiApp = {
 // 8. 截圖輔助 (Screenshot Helper)
 // ============================================================
 
+/**
+ * 截圖輔助模組
+ * @namespace ScreenshotHelper
+ */
 const ScreenshotHelper = {
+  /** @type {boolean} 狀態鎖：防止重複點擊 */
+  isSaving: false,
+
+  /**
+   * 取得當前牌陣的容器元素
+   * @returns {HTMLElement} 牌陣容器
+   */
   getContainer() {
     const key = DomHelper.get('spreadSelector').value;
     if (key === 'blocks') return DomHelper.get('blocksArea');
@@ -770,14 +909,30 @@ const ScreenshotHelper = {
     return DomHelper.get('cardContainer');
   },
 
+  /**
+   * 產生截圖檔案名稱
+   * @param {string} key - 牌陣類型 key
+   * @param {string} question - 使用者輸入的問題
+   * @returns {string} 檔案名稱
+   */
   getFilename(key, question) {
     const spreadName = CONFIG.SPREADS[key]?.name || '未知';
     const cleanQ = question ? `_${question}` : '';
     const ts = Utils.formatDateTime(State.lastDrawTimestamp || new Date());
-    return `紫微牌卡_${spreadName}${cleanQ}_${ts}.webp`;
+    return `紫微牌卡_${spreadName}${cleanQ}_${ts}.png`;
   },
 
+  /**
+   * 執行截圖操作
+   */
   capture() {
+    // 防呆機制：若正在儲存中則直接返回
+    if (this.isSaving) {
+      console.log('儲存進行中，請稍候...');
+      return;
+    }
+    this.isSaving = true;
+
     const key = DomHelper.get('spreadSelector').value;
     const container = this.getContainer();
     const question = DomHelper.get('questionInput').value;
@@ -790,8 +945,8 @@ const ScreenshotHelper = {
     /* global html2canvas */
     html2canvas(container, {
       backgroundColor: null,
-      scale: 2,
-      windowWidth: 1024,
+      scale: CONFIG.SCREENSHOT.SCALE,
+      windowWidth: CONFIG.SCREENSHOT.WINDOW_WIDTH,
       onclone: (doc) =>
         this.styleClone(doc, container.id, spreadName, question, timestamp),
     })
@@ -799,18 +954,29 @@ const ScreenshotHelper = {
       .catch((err) => {
         console.error('Screenshot failed', err);
         alert('儲存失敗，請重試');
+      })
+      .finally(() => {
+        this.isSaving = false;
       });
   },
 
+  /**
+   * 套用截圖樣式至複製的 DOM
+   * @param {Document} doc - 複製的 Document
+   * @param {string} containerId - 容器 ID
+   * @param {string} title - 牌陣名稱
+   * @param {string} question - 使用者問題
+   * @param {string} time - 時間戳記
+   */
   styleClone(doc, containerId, title, question, time) {
     const cloned = doc.getElementById(containerId);
 
-    // Base Styles
+    // 基礎樣式
     Object.assign(cloned.style, {
       position: 'relative',
-      width: '1024px',
-      minWidth: '1024px',
-      background: '#fdfbf7',
+      width: `${CONFIG.SCREENSHOT.WINDOW_WIDTH}px`,
+      minWidth: `${CONFIG.SCREENSHOT.WINDOW_WIDTH}px`,
+      background: CONFIG.SCREENSHOT.BG_COLOR,
       padding: '120px 40px 100px',
       borderRadius: '0',
       boxSizing: 'border-box',
@@ -891,9 +1057,10 @@ const ScreenshotHelper = {
     const isiOS = /iP(hone|ad|od)/.test(ua);
     const isSafari = /Safari/.test(ua) && !/Chrome/.test(ua);
 
+    // 使用 PNG 格式確保 iOS Safari 相容性（iOS 對 webp blob 支援不完整）
     if (isiOS && isSafari) {
       canvas.toBlob(async (blob) => {
-        const file = new File([blob], filename, { type: 'image/webp' });
+        const file = new File([blob], filename, { type: 'image/png' });
         if (navigator.canShare?.({ files: [file] })) {
           try {
             await navigator.share({ files: [file] });
@@ -903,11 +1070,11 @@ const ScreenshotHelper = {
         } else {
           this.openNewTab(blob, filename);
         }
-      }, 'image/webp');
+      }, 'image/png');
     } else {
       const link = document.createElement('a');
       link.download = filename;
-      link.href = canvas.toDataURL('image/webp');
+      link.href = canvas.toDataURL('image/png');
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

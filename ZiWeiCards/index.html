@@ -1,180 +1,258 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+  <head>
+    <!-- 分析追蹤：Microsoft Clarity（延遲載入以優化首屏效能） -->
+    <script type="text/javascript" defer>
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = 'https://www.clarity.ms/tag/' + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, 'clarity', 'script', 'ujevtronz7');
+    </script>
+    <!-- 分析追蹤：Google Tag Manager（延遲載入以優化首屏效能） -->
+    <script defer>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          'gtm.start': new Date().getTime(),
+          event: 'gtm.js',
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-5NFHJV3R');
+    </script>
 
-<head>
-  <!-- 分析追蹤：Microsoft Clarity -->
-  <script type="text/javascript">
-    (function (c, l, a, r, i, t, y) {
-      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-    })(window, document, "clarity", "script", "ujevtronz7");
-  </script>
-  <!-- 分析追蹤：Google Tag Manager -->
-  <script>
-    (function (w, d, s, l, i) {
-      w[l] = w[l] || [];
-      w[l].push({
-        'gtm.start': new Date().getTime(),
-        event: 'gtm.js',
-      });
-      var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s),
-        dl = l != 'dataLayer' ? '&l=' + l : '';
-      j.async = true;
-      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-      f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-5NFHJV3R');
-  </script>
+    <!-- 分析追蹤：Google Analytics（延遲載入以優化首屏效能） -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-25KJDV0K65"
+    ></script>
+    <script defer>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-25KJDV0K65');
+    </script>
 
-  <!-- 分析追蹤：Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-25KJDV0K65"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-25KJDV0K65');
-  </script>
+    <!-- 基本 Meta 標籤 -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="紫微牌卡線上抽牌 - 沐心紫微提供多種牌陣選擇，包含擲筊、單張、對宮、三方四正及十二宮位大牌陣"
+    />
+    <title>紫微牌卡 | 沐心紫微</title>
 
-  <!-- 基本 Meta 標籤 -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="紫微牌卡線上抽牌 - 沐心紫微提供多種牌陣選擇，包含擲筊、單張、對宮、三方四正及十二宮位大牌陣" />
-  <title>紫微牌卡 | 沐心紫微</title>
+    <!-- 安全：內容安全政策 (CSP) -->
+    <!-- 註：ws://127.0.0.1:* 用於開發環境 Live Server 熱重載 -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://c.clarity.ms; connect-src 'self' https://api.counterapi.dev https://www.google-analytics.com https://*.clarity.ms ws://127.0.0.1:* wss://127.0.0.1:*;"
+    />
 
-  <!-- 安全：內容安全政策 (CSP) -->
-  <!-- 註：ws://127.0.0.1:* 用於開發環境 Live Server 熱重載 -->
-  <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.clarity.ms https://scripts.clarity.ms 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://c.clarity.ms; connect-src 'self' https://api.counterapi.dev https://www.google-analytics.com https://*.clarity.ms ws://127.0.0.1:* wss://127.0.0.1:*;" />
+    <!-- Favicon 設定 -->
+    <link rel="icon" href="images/Logo/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="images/Logo/favicon.svg" type="image/svg+xml" />
 
-  <!-- Favicon 設定 -->
-  <link rel="icon" href="images/Logo/favicon.ico" type="image/x-icon" />
-  <link rel="icon" href="images/Logo/favicon.svg" type="image/svg+xml" />
+    <!-- Apple Touch Icon 設定 (多尺寸支援) -->
+    <!-- 添加版本參數以破壞快取，確保 iOS 載入最新圖示 -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/Logo/apple-touch-icon.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="images/Logo/apple-touch-icon.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="images/Logo/apple-touch-icon.png"
+    />
+    <link rel="apple-touch-icon" href="images/Logo/apple-touch-icon.png" />
+    <!-- 相容舊版 iOS (iOS 7 之前) -->
+    <link
+      rel="apple-touch-icon-precomposed"
+      href="images/Logo/apple-touch-icon.png"
+    />
 
-  <!-- Apple Touch Icon 設定 (多尺寸支援) -->
-  <!-- 添加版本參數以破壞快取，確保 iOS 載入最新圖示 -->
-  <link rel="apple-touch-icon" sizes="180x180" href="images/Logo/apple-touch-icon.png" />
-  <link rel="apple-touch-icon" sizes="152x152" href="images/Logo/apple-touch-icon.png" />
-  <link rel="apple-touch-icon" sizes="120x120" href="images/Logo/apple-touch-icon.png" />
-  <link rel="apple-touch-icon" href="images/Logo/apple-touch-icon.png" />
-  <!-- 相容舊版 iOS (iOS 7 之前) -->
-  <link rel="apple-touch-icon-precomposed" href="images/Logo/apple-touch-icon.png" />
+    <!-- PWA 設定 -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="紫微牌卡" />
+    <meta name="theme-color" content="#ffffff" />
 
-  <!-- PWA 設定 -->
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="紫微牌卡" />
-  <meta name="theme-color" content="#ffffff" />
+    <!-- 外部資源：字型（非阻塞載入以優化效能） -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@400;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@400;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
-  <!-- 外部資源：字型 -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@400;700&display=swap"
-    rel="stylesheet" />
+    <!-- 效能優化：預載入關鍵圖片資源 -->
+    <link rel="preload" as="image" href="images/Common/背面邊框.webp" />
 
-  <!-- 外部資源：樣式表 -->
-  <link rel="stylesheet" href="style.css" />
-</head>
+    <!-- 外部資源：樣式表 -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
-  <!-- Google Tag Manager (noscript 降級) -->
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NFHJV3R" height="0" width="0"
-      style="display: none; visibility: hidden"></iframe>
-  </noscript>
+  <body>
+    <!-- Google Tag Manager (noscript 降級) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-5NFHJV3R"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
 
-  <!-- 頁首區塊 -->
-  <header class="site-header">
-    <div class="logo-title">
-      <img src="images/Logo/logo_white.webp" alt="沐心 Logo" class="site-logo" />
-      <h1 class="site-title">
-        紫微牌卡
-        <a href="https://www.instagram.com/onmymind.fortune/" target="_blank" rel="noopener noreferrer"
-          class="brand-link">沐心紫微</a>
-      </h1>
+    <!-- 頁首區塊 -->
+    <header class="site-header">
+      <div class="logo-title">
+        <img
+          src="images/Logo/logo_white.webp"
+          alt="沐心 Logo"
+          class="site-logo"
+        />
+        <h1 class="site-title">
+          紫微牌卡
+          <a
+            href="https://www.instagram.com/onmymind.fortune/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="brand-link"
+            >沐心紫微</a
+          >
+        </h1>
+      </div>
+      <time class="update-header" datetime="2025-08-11"
+        >最後更新日期：2025/12/11</time
+      >
+    </header>
+
+    <!-- 控制區：問題輸入、牌陣選擇、操作按鈕 -->
+    <section class="control-bar" aria-label="牌卡控制區">
+      <!-- 問題輸入組 -->
+      <div class="control-group question-group">
+        <label for="questionInput">輸入問題：</label>
+        <input
+          type="text"
+          id="questionInput"
+          class="form-control"
+          placeholder="請輸入問題"
+          autocomplete="off"
+        />
+      </div>
+
+      <!-- 牌陣選擇組 -->
+      <div class="control-group select-group">
+        <label for="spreadSelector">選擇牌陣：</label>
+        <select id="spreadSelector">
+          <option value="blocks">【擲筊】</option>
+          <option value="single">【一張】牌陣 (1長生牌)</option>
+          <option value="two">【二張】牌陣 (1主+1輔)</option>
+          <option value="basicThree" selected>
+            【三張】基礎牌陣 (1主+1輔+1長)
+          </option>
+          <option value="opposition">【對宮】牌陣 (2主+2輔+1長)</option>
+          <option value="threeFour">【三方四正】牌陣 (4主+4輔+1長)</option>
+          <option value="twelve">【十二宮位】大牌陣 (13主+12輔+1長)</option>
+        </select>
+      </div>
+
+      <!-- 按鈕操作組 -->
+      <div class="control-group btn-group">
+        <button type="button" id="drawBtn" class="btn btn-draw">抽牌</button>
+        <span class="divider" aria-hidden="true">｜</span>
+        <button type="button" id="shuffleBtn" class="btn btn-shuffle">
+          洗牌
+        </button>
+        <span class="divider" aria-hidden="true">｜</span>
+        <button type="button" id="saveBtn" class="btn btn-save">
+          儲存牌面
+        </button>
+      </div>
+    </section>
+
+    <!-- 抽牌時間顯示 -->
+    <output id="drawTimeDisplay" class="draw-time" aria-live="polite"></output>
+
+    <!-- 主要內容區：牌卡顯示 -->
+    <main
+      id="cardArea"
+      class="card-wrapper hidden"
+      role="region"
+      aria-label="牌卡顯示區"
+    >
+      <div id="cardContainer" class="card-grid"></div>
+      <div id="twelveContainer" class="twelve-grid hidden"></div>
+    </main>
+
+    <!-- 擲筊顯示區 -->
+    <section
+      id="blocksArea"
+      class="blocks-area hidden"
+      role="region"
+      aria-label="擲筊結果區"
+    >
+      <div class="block-wrapper">
+        <img id="block1" alt="第一枚筊" class="block-img" />
+        <span id="block1Label" class="block-label"></span>
+      </div>
+      <div class="block-wrapper">
+        <img id="block2" alt="第二枚筊" class="block-img" />
+        <span id="block2Label" class="block-label"></span>
+      </div>
+      <p id="blocksResult" class="blocks-result" aria-live="polite"></p>
+    </section>
+
+    <!-- 讀取動畫 Overlay (儲存牌面時顯示) -->
+    <div id="loadingOverlay" class="loading-overlay hidden" aria-live="polite">
+      <div class="loading-content">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p class="loading-text">儲存中...</p>
+      </div>
     </div>
-    <time class="update-header" datetime="2025-08-11">最後更新日期：2025/12/10</time>
-  </header>
 
-  <!-- 控制區：問題輸入、牌陣選擇、操作按鈕 -->
-  <section class="control-bar" aria-label="牌卡控制區">
-    <!-- 問題輸入組 -->
-    <div class="control-group question-group">
-      <label for="questionInput">輸入問題：</label>
-      <input type="text" id="questionInput" class="form-control" placeholder="請輸入問題" autocomplete="off" />
-    </div>
-
-    <!-- 牌陣選擇組 -->
-    <div class="control-group select-group">
-      <label for="spreadSelector">選擇牌陣：</label>
-      <select id="spreadSelector">
-        <option value="blocks">【擲筊】</option>
-        <option value="single">【一張】牌陣 (1長生牌)</option>
-        <option value="two">【二張】牌陣 (1主+1輔)</option>
-        <option value="basicThree" selected>
-          【三張】基礎牌陣 (1主+1輔+1長)
-        </option>
-        <option value="opposition">【對宮】牌陣 (2主+2輔+1長)</option>
-        <option value="threeFour">【三方四正】牌陣 (4主+4輔+1長)</option>
-        <option value="twelve">【十二宮位】大牌陣 (13主+12輔+1長)</option>
-      </select>
-    </div>
-
-    <!-- 按鈕操作組 -->
-    <div class="control-group btn-group">
-      <button type="button" id="drawBtn" class="btn btn-draw">抽牌</button>
-      <span class="divider" aria-hidden="true">｜</span>
-      <button type="button" id="shuffleBtn" class="btn btn-shuffle">
-        洗牌
-      </button>
-      <span class="divider" aria-hidden="true">｜</span>
-      <button type="button" id="saveBtn" class="btn btn-save">
-        儲存牌面
-      </button>
-    </div>
-  </section>
-
-  <!-- 抽牌時間顯示 -->
-  <output id="drawTimeDisplay" class="draw-time" aria-live="polite"></output>
-
-  <!-- 主要內容區：牌卡顯示 -->
-  <main id="cardArea" class="card-wrapper hidden" role="region" aria-label="牌卡顯示區">
-    <div id="cardContainer" class="card-grid"></div>
-    <div id="twelveContainer" class="twelve-grid hidden"></div>
-  </main>
-
-  <!-- 擲筊顯示區 -->
-  <section id="blocksArea" class="blocks-area hidden" role="region" aria-label="擲筊結果區">
-    <div class="block-wrapper">
-      <img id="block1" alt="第一枚筊" class="block-img" />
-      <span id="block1Label" class="block-label"></span>
-    </div>
-    <div class="block-wrapper">
-      <img id="block2" alt="第二枚筊" class="block-img" />
-      <span id="block2Label" class="block-label"></span>
-    </div>
-    <p id="blocksResult" class="blocks-result" aria-live="polite"></p>
-  </section>
-
-  <!-- 讀取動畫 Overlay (儲存牌面時顯示) -->
-  <div id="loadingOverlay" class="loading-overlay hidden" aria-live="polite">
-    <div class="loading-content">
-      <div class="loading-spinner" aria-hidden="true"></div>
-      <p class="loading-text">儲存中...</p>
-    </div>
-  </div>
-
-  <!-- 外部資源：腳本 (置於頁尾以優化載入效能) -->
-  <!-- 安全：已加入 SRI (Subresource Integrity) 驗證 -->
-  <!-- 註：ws://127.0.0.1:* 在 CSP 中用於開發環境 Live Server 熱重載 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
-    integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
-  <script src="script.js"></script>
-</body>
-
+    <!-- 外部資源：腳本 (置於頁尾以優化載入效能) -->
+    <!-- 安全：已加入 SRI (Subresource Integrity) 驗證 -->
+    <!-- 註：ws://127.0.0.1:* 在 CSP 中用於開發環境 Live Server 熱重載 -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+      integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      defer
+    ></script>
+    <script src="script.js"></script>
+  </body>
 </html>
